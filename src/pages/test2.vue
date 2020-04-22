@@ -1,30 +1,13 @@
 <template>
-  <div class="temperatureChart">
-   
-    <!-- <everNoData tipTxt="该日期无体温表信息" v-if="options.dataSource==null"></everNoData> -->
-    <div class="chartBox" id="printContent">
-      <div id="printBox">
-        <h4 class="temperatureHeader">体温单</h4>
-        <ul
-          v-if="patientInfo"
-          class="temperatureRow"
-        >
-          <template v-for ="item in patientInfo.header">
-            <li :key="item.nameEn">{{item.nameCn}}:{{formatVal(patientInfo,item.nameEn)}}</li>
-          </template>
-        </ul>
-        <div id="chart"></div>
-      </div>
-    </div>
-  </div>
+    <div id="chart"></div>
 </template>
 <script>
-import { dataSource } from './dataSource.js'
+import { dataSource } from './datasource.js'
 import {Chart} from './temperature.js'
 export default { // authority权限控制，1只读，2可打印
   data () {
     return {
-      beginDate: '2020-04-21 00:00:00',
+      beginDate: '2020-04-20 00:00:00',
       patientInfo: null,
       obj: null,
       options: {
@@ -41,7 +24,7 @@ export default { // authority权限控制，1只读，2可打印
       return (obj, name) => {
         if (name === 'birthday' || name === 'enterDate') {
           if (!obj.data[name]) return '--'
-          return this.$moment(obj.data[name]).format('YYYY-MM-DD')
+          return obj.data[name]
         } else {
           return obj.data[name] || '--'
         }
@@ -57,8 +40,6 @@ export default { // authority权限控制，1只读，2可打印
       this.patientInfo = dataSource.patientInfo
       this.options.dataSource = dataSource
       this.options.beginTime = this.beginDate
-          this.patientInfo = res.patientInfo
-          this.options.dataSource = res
       setTimeout(() => {
         this.obj = new Chart(this.options)
       }, 1000)

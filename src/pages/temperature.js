@@ -18,8 +18,8 @@ Chart.prototype = {
   constructor: Chart,
   // 初始化
   init: function (options) {
-    this.setData(options)
-    this.setAxis()
+    this.setData(options)//处理option里面的数据
+    this.setAxis()//体温和脉搏的xy轴设置
     this.drawLayout()
     this.renderData()
   },
@@ -69,6 +69,7 @@ Chart.prototype = {
     this.colums = [1, 2, 3, 4, 5, 6, 7, 8]
     this.titleWidth = 130
     this.columWidth = (this.width - this.titleWidth) / (this.colums.length - 1)
+    //设置开始时间，结束时间
     this.beginTime = new Date(options.beginTime)
     this.beginTime.setHours(0, 0, 0, 0)
     this.endTime = getEndTime(this.beginTime)
@@ -111,18 +112,18 @@ Chart.prototype = {
   // 布局
   drawLayout: function () {
     const that = this
-    // 绘制svg容器
+    // 绘制svg容器(公共属性)
     d3.select('#' + this.id).select('svg').remove()
     this.svg = d3
       .select('#' + this.id)
       .append('svg')
-      .attr('width', this.width + 1)
-      .attr('height', this.height + 1)
+      .attr('width', this.width)
+      .attr('height', this.height)
       .style('font', '10px sans-serif')
       .attr('class', 'svg')
       .append('g')
       .attr('class', 'wrap')
-      .attr('transform', 'translate(1,1)')
+      .attr('transform', 'translate(0,0)')
 
     function hasName (arr, val) {
       for (let i = 0; i < arr.length; i++) {
@@ -399,7 +400,7 @@ Chart.prototype = {
     })
   },
   // 设置坐标轴
-  setAxis: function () {
+  setAxis: function () {//将体温和脉搏公共部分抽离出来，其他分别写到自己的类里面
     const that = this
     const h = this.tempHeight - this.rowHeight
     const w = this.width - this.titleWidth
@@ -416,13 +417,13 @@ Chart.prototype = {
       .scaleTime()
       .domain([this.beginTime, this.endTime])
       .range([0, w])
-
+    //体温
     this.y1 = d3
       .scaleLinear()
       .domain([tw.min, tw.max])
       .rangeRound([h, 0])
     this.y1.clamp(true)
-
+    //脉搏
     this.y2 = d3
       .scaleLinear()
       .domain([mb.min, mb.max])
@@ -431,12 +432,13 @@ Chart.prototype = {
     // 坐标轴
     this.xAxis = d3
       .axisBottom(this.x)
-      .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 4))
+      .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 4))//4小时一个格子
       .tickSize(h)
       .tickFormat(function (d, i) {
         return
       })
-
+    
+    //体温
     this.yAxis = d3
       .axisLeft(this.y1)
       .tickValues(d3.range(tw.min, tw.max, 0.2))
@@ -446,6 +448,7 @@ Chart.prototype = {
           return d
         }
       })
+    //脉搏
     this.yAxis2 = d3
       .axisLeft(this.y2)
       .tickValues(d3.range(mb.min, mb.max, 4))
@@ -457,6 +460,7 @@ Chart.prototype = {
       })
 
     // 绘制折线
+    //体温
     this.line = d3
       .line()
       .defined(function (d) {
@@ -468,6 +472,7 @@ Chart.prototype = {
       .y(function (d) {
         return that.y1(d.svgValue)
       })
+    //脉搏
     this.line2 = d3
       .line()
       .defined(function (d) {
@@ -482,7 +487,7 @@ Chart.prototype = {
   },
   // 绘制血压
   drawBloodPressAxis: function () {
-    const bloodPressXAxis = d3
+    const bloodPressXAxis = d3 //公共的
       .axisBottom(this.x)
       .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 12))
       .tickSize(this.rowHeight)
@@ -497,12 +502,12 @@ Chart.prototype = {
       .attr('transform', 'translate(' + this.titleWidth + ',0)')
       .call(bloodPressXAxis)
 
-    this.svg
-      .select('g.hx')
-      .selectAll('g.tick')
-      .select('line')
-      .attr('class', 'xAxisLine')
-      .attr('stroke', this.style.lineColor)
+    // this.svg
+    //   .select('g.hx')
+    //   .selectAll('g.tick')
+    //   .select('line')
+    //   .attr('class', 'xAxisLine')
+    //   .attr('stroke', this.style.lineColor)
   },
   // 绘制事件
   drawEvent: function (data, command) {
@@ -566,7 +571,7 @@ Chart.prototype = {
       .attr('height', this.tempHeight)
       .attr('stroke', this.style.tempColor)
       .attr('stroke-width', this.style.strokeRect)
-    this.drawTimeBar()
+    this.drawTimeBar()    //时间格子
     this.drawChartLayout()
   },
   // 绘制折线
@@ -579,8 +584,6 @@ Chart.prototype = {
       if (type === 'temperature') {
         var val = d.yw || d.gw || d.kw
         d.svgValue = val
-        // d.coolValue =d.jw
-        // d.heatValue = getConvertValue(d.sw, info.min, info.max, that.tempHeight)
       } else {
         d.svgValue = d.ml
       }
@@ -822,24 +825,11 @@ Chart.prototype = {
     let timeTitle = this.tempChart
       .append('g')
       .attr('class', 'timeTitle')
+    timeTitle.html(`
+      <rect width="${this.titleWidth}" height="${this.rowHeight}" stroke="${this.style.lineColor}" stroke-width="${this.style.strokeRect}"></rect>
+      <text x="${this.titleWidth / 2}" y="${this.rowHeight / 2}" text-anchor="middle" dominant-baseline="middle" font-size="14px">时间</text>
+    `)
 
-    timeTitle
-      .append('rect')
-      .attr('width', this.titleWidth)
-      .attr('height', this.rowHeight)
-      .attr('stroke', this.style.lineColor)
-      .attr('stroke-width', this.style.strokeRect)
-
-    timeTitle
-      .append('text')
-      .attr('x', this.titleWidth / 2)
-      .attr('y', this.rowHeight / 2)
-      .attr('text-anchor', 'middle')
-      .attr('dominant-baseline', 'middle')
-      .attr('font-size', '14')
-      .text(function (d, i) {
-        return '时间'
-      })
 
     let timeBar = this.tempChart
       .select('g.timeAxis')
@@ -853,18 +843,13 @@ Chart.prototype = {
         const move = i * (that.width - that.titleWidth) / 42
         return 'translate(' + move + ',0)'
       })
-
-    timeBar
-      .append('rect')
-      .attr('class', 'rectTime')
-      .attr('stroke', this.style.lineColor)
-      .attr('stroke-width', this.style.strokeRect)
-      .attr('width', (this.width - this.titleWidth) / 42)
-      .attr('height', this.rowHeight)
+    timeBar.html(`
+      <rect width="${(this.width - this.titleWidth) / 42}" height="${this.rowHeight}" stroke="${this.style.lineColor}" stroke-width="${this.style.strokeRect}"></rect>
+    `)
 
     timeBar
       .append('text')
-      .attr('x', this.width / 42 / 2)
+      .attr('x', this.width / 42 / 2-2)
       .attr('y', this.rowHeight / 2)
       .attr('fill', this.style.lineColor)
       .attr('text-anchor', 'middle')
@@ -963,12 +948,12 @@ Chart.prototype = {
       .attr('transform', 'translate(' + this.titleWidth + ',0)')
       .call(breathXAxis)
 
-    this.svg
-      .select('g.hx')
-      .selectAll('g.tick')
-      .select('line')
-      .attr('class', 'xAxisLine')
-      .attr('stroke', this.style.lineColor)
+    // this.svg
+    //   .select('g.hx')
+    //   .selectAll('g.tick')
+    //   .select('line')
+    //   .attr('class', 'xAxisLine')
+    //   .attr('stroke', 'red')
   },
   // 左侧y轴
   drawDataAxis: function (info, index) {
@@ -1049,11 +1034,12 @@ Chart.prototype = {
       .attr('stroke-width', 2)
 
     // 绘制y轴刻度
+    //体温
     this.chart
       .append('g')
       .attr('class', 'y axisY')
       .call(this.yAxis)
-
+    //脉搏
     this.chart
       .append('g')
       .attr('class', 'y2 axisY')
@@ -1079,10 +1065,10 @@ Chart.prototype = {
       .select('text')
       .attr('x', '-20')
 
-    this.chart
-      .selectAll('g.axis')
-      .select('path.domain')
-      .attr('stroke', this.style.lineColor)
+    // this.chart //设置刻度线样式
+    //   .selectAll('g.axis')
+    //   .select('path.domain')
+    //   .attr('stroke', 'red')
   },
   // 绘制疼痛布局
   drawPainLayout: function () {
@@ -1379,20 +1365,7 @@ Chart.prototype = {
         return icon
       })
   },
-  drawPulse: function (x, y, type) {
-        // .append('circle')
-        // .attr('stroke', this.lineColor[type])
-        // .attr('stroke-width', this.style.circleWidth)
-        // .attr('fill', this.lineColor[type])
-        // .attr('cx', function (d, i) {
-        //   return that.x(new Date(d.datetime))
-        // })
-        // .attr('cy', function (d, i) {
-        //   return that.y2(d.ml)
-        // })
-        // .attr('r', function (d, i) {
-        //   return that.style.circleR
-        // })
+  drawPulse: function (x, y, type) {//脉搏  (如果有类型相同的点可以新建函数直接返回该函数)
     this.chart
       .append('g')
       .attr('class', 'CirclesWrap')
@@ -1409,56 +1382,70 @@ Chart.prototype = {
     var cross = this.chart
       .append('g')
       .attr('class', 'cross')
+      .attr('stroke','blue')
+      .attr('stroke-linecap','round')
+      .attr('stroke-width',`${this.style.lineWidth + 1}`)
       .attr('transform', 'translate(' + (x - 4) + ',' + (y - 4) + ') scale(0.8)')
     var pointy = 8
-    cross
-      .append('line')
-      .attr('x1', 0)
-      .attr('y1', 0)
-      .attr('x2', pointy)
-      .attr('y2', pointy)
-      .attr('stroke', 'blue')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-width', this.style.lineWidth + 1)
+    cross.html(`
+      <line x1="0" y1="0" x2="${pointy}" y2="${pointy}"></line>
+      <line x1="${pointy}" y1="0" x2="0" y2="${pointy}"></line>
+    `)
+    // cross
+    //   .append('line')
+    //   .attr('x1', 0)
+    //   .attr('y1', 0)
+    //   .attr('x2', pointy)
+    //   .attr('y2', pointy)
+    //   .attr('stroke', 'blue')
+    //   .attr('stroke-linecap', 'round')
+    //   .attr('stroke-width', this.style.lineWidth + 1)
 
-    cross
-      .append('line')
-      .attr('x1', pointy)
-      .attr('y1', 0)
-      .attr('x2', 0)
-      .attr('y2', pointy)
-      .attr('stroke', 'blue')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-width', this.style.lineWidth + 1)
+    // cross
+    //   .append('line')
+    //   .attr('x1', pointy)
+    //   .attr('y1', 0)
+    //   .attr('x2', 0)
+    //   .attr('y2', pointy)
+    //   .attr('stroke', 'blue')
+    //   .attr('stroke-linecap', 'round')
+    //   .attr('stroke-width', this.style.lineWidth + 1)
   },
   // 绘制加号
   drawPlus: function (x, y) {
     var cross = this.painAxis
       .append('g')
       .attr('class', 'cross')
+      .attr('stroke','red')
+      .attr('stroke-linecap','round')
+      .attr('stroke-width',`${this.style.lineWidth + 1}`)
       .attr('transform', 'translate(' + (x - 4) + ',' + (y - 4) + ') scale(1)')
     var pointy = 8
-    cross
-      .append('line')
-      .attr('x1', 0)
-      .attr('y1', pointy)
-      .attr('x2', pointy)
-      .attr('y2', pointy)
-      .attr('transform', 'translate(' + 0 + ',' + -pointy / 2 + ')')
-      .attr('stroke', 'red')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-width', this.style.lineWidth + 1)
+    cross.html(`
+      <line x1="0" y1="${pointy}" x2="${pointy}" y2="${pointy}" transform="translate(0,${-pointy/2})"></line>
+      <line x1="${pointy}" y1="0" x2="${pointy}" y2="${pointy}" transform="translate(${-pointy/2},0)"></line>
+    `)
+    // cross
+    //   .append('line')
+    //   .attr('x1', 0)
+    //   .attr('y1', pointy)
+    //   .attr('x2', pointy)
+    //   .attr('y2', pointy)
+    //   .attr('transform', 'translate(' + 0 + ',' + -pointy / 2 + ')')
+    //   .attr('stroke', 'red')
+    //   .attr('stroke-linecap', 'round')
+    //   .attr('stroke-width', this.style.lineWidth + 1)
 
-    cross
-      .append('line')
-      .attr('x1', pointy)
-      .attr('y1', 0)
-      .attr('x2', pointy)
-      .attr('y2', pointy)
-      .attr('transform', 'translate(' + -pointy / 2 + ',' + 0 + ')')
-      .attr('stroke', 'red')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-width', this.style.lineWidth + 1)
+    // cross
+    //   .append('line')
+    //   .attr('x1', pointy)
+    //   .attr('y1', 0)
+    //   .attr('x2', pointy)
+    //   .attr('y2', pointy)
+    //   .attr('transform', 'translate(' + -pointy / 2 + ',' + 0 + ')')
+    //   .attr('stroke', 'red')
+    //   .attr('stroke-linecap', 'round')
+    //   .attr('stroke-width', this.style.lineWidth + 1)
   },
   // 肛温和脉搏重叠
   drawgm: function (x, y) {
@@ -1487,28 +1474,14 @@ Chart.prototype = {
   },
   // 口温和脉搏重叠
   drawkm: function (x, y) {
-    var km = this.chart
+    this.chart
       .append('g')
       .attr('class', 'CirclesWrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
-
-    km
-      .append('circle')
-      .attr('stroke', 'red')
-      .attr('stroke-width', this.style.circleWidth)
-      .attr('fill', '#fff')
-      .attr('cx', 0)
-      .attr('cy', 0)
-      .attr('r', this.style.circleR + 1)
-
-    km
-      .append('circle')
-      .attr('stroke', 'none')
-      .attr('stroke-width', this.style.circleWidth)
-      .attr('fill', 'blue')
-      .attr('cx', 0)
-      .attr('cy', 0)
-      .attr('r', 2)
+      .html(`
+        <circle stroke="red" fill="#FFF" r="${this.style.circleR + 1}" cx="0" cy="0" stroke-width="${this.style.circleWidth}"></circle>
+        <circle stroke="none" fill="blue" r="2" cx="0" cy="0" stroke-width="${this.style.circleWidth}"></circle>
+      `)
   },
   // 腋温和脉搏重叠
   drawym: function (x, y) {
@@ -1527,7 +1500,7 @@ Chart.prototype = {
       .attr('r', this.style.circleR + 1)
     this.drawCross(x, y)
   },
-  // 腋温和脉搏重叠
+  // 心率和脉搏重叠
   drawxm: function (data, type, index) {
     const that = this
     var xm = this.chart
@@ -1544,22 +1517,26 @@ Chart.prototype = {
         const y = that.y2(d.xl)
         return 'translate(' + x + ', ' + y + ')'
       })
-    xm
-      .append('circle')
-      .attr('stroke', 'red')
-      .attr('stroke-width', this.style.circleWidth)
-      .attr('fill', '#fff')
-      .attr('cx', 0)
-      .attr('cy', 0)
-      .attr('r', this.style.circleR + 1)
-    xm
-      .append('circle')
-      .attr('stroke', 'none')
-      .attr('stroke-width', this.style.circleWidth)
-      .attr('fill', 'red')
-      .attr('cx', 0)
-      .attr('cy', 0)
-      .attr('r', 2)
+    xm.html(`
+      <circle stroke="red" stroke-width="${this.style.circleWidth}" fill="#fff" cx="0" cy="0" r="${this.style.circleR + 1}"></circle>
+      <circle stroke="none" stroke-width="${this.style.circleWidth}" fill="red" cx="0" cy="0" r="2"></circle>
+    `)
+    // xm
+    //   .append('circle')
+    //   .attr('stroke', 'red')
+    //   .attr('stroke-width', this.style.circleWidth)
+    //   .attr('fill', '#fff')
+    //   .attr('cx', 0)
+    //   .attr('cy', 0)
+    //   .attr('r', this.style.circleR + 1)
+    // xm
+    //   .append('circle')
+    //   .attr('stroke', 'none')
+    //   .attr('stroke-width', this.style.circleWidth)
+    //   .attr('fill', 'red')
+    //   .attr('cx', 0)
+    //   .attr('cy', 0)
+    //   .attr('r', 2)
   },
   // 心率点
   drawxl: function (data, type, index) {

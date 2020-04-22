@@ -1,5 +1,5 @@
 let dataSource1 = {
-  'charType': '1',
+  'charType': '2',
   'logoSrc': null,
   'chartData': [
     {
@@ -89,7 +89,27 @@ let dataSource1 = {
       'patientStatus': false,
       'pacemakerStatus': true
     }, ],
-  'painData': null,
+  'painData':  [{
+    "datetime": "2020-04-21 02:00:00",
+    "pain": 4,
+    "zt": null
+  }, {
+    "datetime": "2020-04-22 02:00:00",
+    "pain": 7,
+    "zt": 3
+  }, {
+    "datetime": "2020-04-22 06:00:00",
+    "pain": null,
+    "zt": null
+  }, {
+    "datetime": "2020-04-23 02:00:00",
+    "pain": 3,
+    "zt": 3
+  }, {
+    "datetime": "2020-04-24 02:00:00",
+    "pain": null,
+    "zt": null
+  }],
   'statusUp': [],
   'statusDown': null,
   'patientInfo': {
@@ -392,7 +412,7 @@ let dataSource1 = {
   }
 }
 let dataSource = {
-  'charType': '1',
+  'charType': '2',
   'logoSrc': null,
   'chartData': [
     {
@@ -403,7 +423,7 @@ let dataSource = {
       'sw': '',
       'jw': '',
       'xl': 181,
-      'ml': null,
+      'ml': 80,
       'hx': null,
       'patientStatus': false,
       'pacemakerStatus': true
@@ -416,7 +436,7 @@ let dataSource = {
       'sw': '',
       'jw': '',
       'xl': null,
-      'ml': '190',
+      'ml': '140',
       'hx': null,
       'patientStatus': false,
       'pacemakerStatus': true
@@ -434,19 +454,20 @@ let dataSource = {
       'patientStatus': false,
       'pacemakerStatus': true
     },
-    // {
-    //   'datetime': '2020-04-23 02:00:00',
-    //   'yw': null,
-    //   'kw': null,
-    //   'gw': 39,
-    //   'sw': '',
-    //   'jw': '',
-    //   'xl': 160,
-    //   'ml': '180',
-    //   'hx': null,
-    //   'patientStatus': false,
-    //   'pacemakerStatus': true
-    // }, {
+    {
+      'datetime': '2020-04-23 02:00:00',
+      'yw': null,
+      'kw': null,
+      'gw': 39,
+      'sw': '',
+      'jw': '',
+      'xl': 160,
+      'ml': 160,
+      'hx': null,
+      'patientStatus': false,
+      'pacemakerStatus': false
+    }
+    //  {
     //   'datetime': '2020-04-24 02:00:00',
     //   'yw': 38.5,
     //   'kw': null,
@@ -484,7 +505,27 @@ let dataSource = {
     //   'pacemakerStatus': true
     // },
   ],
-  'painData': null,
+  'painData':  [{
+    "datetime": "2020-04-21 02:00:00",
+    "pain": 4,
+    "zt": null
+  }, {
+    "datetime": "2020-04-22 02:00:00",
+    "pain": 7,
+    "zt": 3
+  }, {
+    "datetime": "2020-04-22 06:00:00",
+    "pain": null,
+    "zt": null
+  }, {
+    "datetime": "2020-04-23 02:00:00",
+    "pain": 3,
+    "zt": 3
+  }, {
+    "datetime": "2020-04-24 02:00:00",
+    "pain": null,
+    "zt": null
+  }],
   'statusUp': [],
   'statusDown': null,
   'patientInfo': {
