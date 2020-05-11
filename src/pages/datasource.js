@@ -431,15 +431,15 @@ let dataSource = {
     {
       'datetime': '2020-04-21 10:00:00',
       'yw': null,
-      'kw': 40,
+      'kw': null,
       'gw': null,
       'sw': '',
       'jw': '',
-      'xl': null,
+      'xl': 140,
       'ml': '140',
       'hx': null,
       'patientStatus': false,
-      'pacemakerStatus': true
+      'pacemakerStatus': false
     },
     {
       'datetime': '2020-04-22 02:00:00',

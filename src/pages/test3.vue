@@ -4,8 +4,13 @@
             <div class="left_title"></div>
             <div class="right_content">
                 <div class="content_auto">
-                    右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域右侧内容区域
+                    
                 </div>
+            </div>
+        </div>
+        <div class="legend">
+            <div class="icon" v-for="item in icons" :key="item">
+                <p>{{item}}</p>
             </div>
         </div>
     </div>
@@ -15,7 +20,8 @@ import {adaptData,Layout} from './test.js'
 export default {
     data(){
         return{
-           adaptData 
+           adaptData,
+           icons:['腋温','口温','肛温','降温','脉搏','心率','心率起搏器','疼痛','镇痛','腋温脉搏重叠','口温脉搏重叠','肛温脉搏重叠','心率脉搏重叠','疼痛镇痛重叠']
         }
     },
     mounted(){
@@ -28,13 +34,18 @@ export default {
 }
 </script>
 <style scoped>
-
+.test3{
+    width: 1000px;
+    margin:0 auto;
+    display:flex;
+    flex-direction: row;
+    text-align: left;
+}
 .temperature_wrap{
     display:flex;
     flex-direction: row;
     width:700px;
     height:900px;
-    margin:0 auto;
     border:1px solid #000;
     overflow:hidden;
 }
@@ -51,5 +62,17 @@ export default {
 }
 .content_auto{
     width:800px;
+}
+.legend{
+    width: 200px;
+    height:300px;
+    
+}
+.legend .icon{
+    display: flex;
+    flex-direction: row;
+}
+.legend p {
+    line-height:20px;
 }
 </style>
