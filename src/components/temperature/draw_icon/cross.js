@@ -10,7 +10,7 @@ export default class AxillaryTemperature{//腋温
     Object.assign(this.config,this.baseConfig,config)
   }
   draw(root,config={}){
-    console.log('crosss',config)
+    // console.log('crosss',config)
     let skewY=this.config.skewY || -4
     let skewX=this.config.skewX || 0
     let x=config.x+skewX

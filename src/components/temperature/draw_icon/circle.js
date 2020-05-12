@@ -16,7 +16,7 @@ export default class Circle{
     Object.assign(this.config,this.baseConfig,config)
   }
   draw(root,config){
-    console.log(this.config,root,config)
+    // console.log(this.config,root,config)
     let x=config.x
     let y=config.y
 

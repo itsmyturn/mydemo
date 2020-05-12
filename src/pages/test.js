@@ -1,35 +1,83 @@
 import * as d3 from 'd3'
 import {dataSource} from './datasource2.js'
 import {AdaptData,AdaptSize} from '../components/temperature/adaptData.js'
-import Point from '../components/temperature/point.js'
+import {axisConfig} from '../components/temperature/axisconfig.js'
+// import Point from '../components/temperature/point.js' //图标接口 
+import Axis from '../components/temperature/axis.js' //坐标轴接口
 
 //适配体温单需要的数据
 let adaptData=new AdaptData(dataSource)
 let adaptSize=new AdaptSize(dataSource)
-function DrawIconTest(){
- d3.selectAll('.icon').insert('svg','p')
-  .attr('width',30)
-  .attr('height',20)
-  .append('g')
-  .attr('class','g-icon')
-  .attr('transform','translate(0,0)')
-  let nodes=d3.selectAll('g.g-icon').nodes()
-  let point=new Point()
-  point.draw(d3.select(nodes[0]),'axillary',{x:10,y:10})
-  point.draw(d3.select(nodes[1]),'oral',{x:10,y:10})
-  point.draw(d3.select(nodes[2]),'anal',{x:10,y:10})
-  point.draw(d3.select(nodes[3]),'cooling',{x:10,y:10})
-  point.draw(d3.select(nodes[4]),'pulse',{x:10,y:10})
-  point.draw(d3.select(nodes[5]),'heart',{x:10,y:10})
-  point.draw(d3.select(nodes[6]),'heart',{x:10,y:10,peaceMaker:true})
-  point.draw(d3.select(nodes[7]),'pain',{x:10,y:10})
-  point.draw(d3.select(nodes[8]),'analgesia',{x:10,y:10})
-  point.draw(d3.select(nodes[9]),'overlap',{x:10,y:10,overlapType:'axillaryAndHeart'})
-  point.draw(d3.select(nodes[10]),'overlap',{x:10,y:10,overlapType:'oralAndHeart'})
-  point.draw(d3.select(nodes[11]),'overlap',{x:10,y:10,overlapType:'analAndHeart'})
-  point.draw(d3.select(nodes[12]),'overlap',{x:10,y:10,overlapType:'pulseAndHeart'})
-  point.draw(d3.select(nodes[13]),'overlap',{x:10,y:10,overlapType:'painAndAnalgesia'})
+function axisTest(){
+  
+  let h=0
+  let svg=d3.select('.content_auto').append('svg')
+  .attr('width','100%')
+  .attr('height','100%')
+  svg.selectAll('.axis_layout')
+    .data(axisConfig)
+    .enter()
+    .append('g')
+    .attr('class',function(d){
+      return `axis_layout axis_layout_${d.nameEn}`
+    })
+    .attr('transform',function(d){
+      h+=d.top
+      return `translate(0,${h})`
+    })
+  let nodes=d3.selectAll('g.axis_layout').nodes()
+  nodes.forEach((node,index)=>{
+    let axis=new Axis()
+    let item=axisConfig[index]
+    axis.setAxisConfig({
+      tickSize:item.height,
+      stepX:item.stepX
+    })
+    d3.select(nodes[index]).append('g')
+    .attr('class','axisX')
+    .call(axis.getAxisX())
+    d3.select(nodes[index])
+    .select(`g.axis_layout_${item.nameEn} g.axisX`)
+    .selectAll('g.tick')
+    .select('line')
+    .attr('class', 'xAxisLine')
+    .attr('stroke', function (d,i) {
+      let arr=['date','zhuYuanTianshu','shouShu','TI_GE_JIAN_CHATI_ZHONG','TI_GE_JIAN_CHASHEN_GAO','YE_TI_RU_LIANG_ml','NIAO_LIANG_ml','DA_BIAN_CI_SHU','PI_SHI_JIE_GUO','XUE_TANG_JIAN_CE_ZHImmolL','TE_SHU_ZHI_LIAO']
+      let arr2=['temperatureAndPulse','temperatureAndPulse','hx']
+      let arr3=['xueYa']
+      if(arr2.includes(item.nameEn)){
+        if(i%6===0){
+          return 'red'
+        }else{
+          return '#ccc'
+        }
+      }
+      if(arr.includes(item.nameEn)){
+        return 'red'
+      }
+      
+      if(arr3.includes(item.nameEn)){
+        if(i%2===0){
+          return 'red'
+        }else{
+          return '#000'
+        }
+
+      }
+      // console.log(i,d)
+      // if(i%4===0){
+      //   return 'red'
+      // }else{
+      //   return '#000'
+      // }
+      
+    })
+    .attr('stroke-width', 2)
+  })
+  
+ 
 }
+
 class Layout{
   constructor(){
     this.titleData=adaptData.getDynamicHeader()
@@ -37,7 +85,8 @@ class Layout{
     this.titleWrap=null
     this.row=null
     this.colums=null
-    DrawIconTest()
+    // DrawIconTest() //图标测试
+    axisTest()//利用坐标轴布局测试
   }
   createWrap(){
     this.titleWrap=d3

@@ -1113,7 +1113,7 @@ Chart.prototype = {
     this.painXAxis = d3
       .axisBottom(this.x)
       .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 4))
-      .tickSize(this.painHeight)
+      .tickSize(30)
       .tickFormat(function (d, i) {
         return
       })
@@ -1129,7 +1129,7 @@ Chart.prototype = {
       .tickValues(d3.range(0, 110 / 10, 2))
       .tickSize(-this.width)
       .tickFormat(function (d, i) {
-        return d
+        return 
       })
     this.painAxis = this.painChart
       .append('g')

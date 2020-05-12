@@ -10,7 +10,7 @@
         </div>
         <div class="legend">
             <div class="icon" v-for="item in icons" :key="item">
-                <p>{{item}}</p>
+                <!-- <p>{{item}}</p> -->
             </div>
         </div>
     </div>
@@ -56,12 +56,13 @@ export default {
 }
 .right_content{
     flex:1;
-    overflow:auto;
+    overflow:hidden;/*auto*/
     border:1px solid #0f0;
 
 }
 .content_auto{
     width:800px;
+    height:100%;
 }
 .legend{
     width: 200px;
