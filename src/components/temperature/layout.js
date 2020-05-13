@@ -1,12 +1,12 @@
 import * as d3 from 'd3'
 import {dataSource} from './datasource2.js'
 import {AdaptData,AdaptSize} from './adaptData.js'
-import {axisConfig} from './axisconfig.js'
+import {axisConfig} from './axis/axisconfig.js'
 //插入数据结构
 //适配体温单需要的数据
 let adaptData=new AdaptData(dataSource)
 let adaptSize=new AdaptSize(dataSource)
-
+ 
 export  class Layout{
   constructor(ConstructorTest){
     this.titleData=adaptData.getDynamicHeader()

@@ -1,12 +1,12 @@
 export class AxisTickStyle{
   constructor(){
     this.arr=['date','zhuYuanTianshu','shouShu','TI_GE_JIAN_CHATI_ZHONG','TI_GE_JIAN_CHASHEN_GAO','YE_TI_RU_LIANG_ml','NIAO_LIANG_ml','DA_BIAN_CI_SHU','PI_SHI_JIE_GUO','XUE_TANG_JIAN_CE_ZHImmolL','TE_SHU_ZHI_LIAO']
-    this.arr2=['temperatureAndPulse','pain','hx']
+    this.arr2=['temperatureAndPulse','pain','hx','time']
     this.arr3=['xueYa']
   }
   getStrokeColor(name,index){
     if(this.arr2.includes(name)){
-      if(name==='hx'){
+      if(name==='hx'||name==='time'){
         if(index%6===0&&index!==0){
           return 'red'
         }else{

@@ -17,17 +17,23 @@ export const axisConfig=[{
   'top':rowHeight,
   'height':rowHeight,
   'stepX':24
-}, 
+}, {
+  'nameCn': '时间',
+  'nameEn': 'time',
+  'top':rowHeight,
+  'height':rowHeight,
+  'stepX':4
+},
 {
   'nameCn': '体温脉搏',
   'nameEn': 'temperatureAndPulse',
   'top':rowHeight,
-  'height':520,
+  'height':500,
   'stepX':4
 },{
   'nameCn': '疼痛',
   'nameEn': 'pain',
-  'top':520,
+  'top':500,
   'height':100,
   'stepX':4
 },{
