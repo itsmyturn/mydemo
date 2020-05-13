@@ -17,7 +17,14 @@ export class Axis{
       start:'',//刻度起点
       end:'',
       tickSizeX:100,
-      tickSizeY:-568
+      tickSizeY:-568,
+      tickValueRange:[12,180,4],
+      domainRange:[12, 180],
+      valueRange:[500, 0],
+      tickFormatCallback:function(d){
+        return d
+      }
+
     }
     this.config=Object.assign({},this.baseConfig)
     
@@ -43,22 +50,20 @@ export class Axis{
       })
     return axisX
   }
-  getScaleY(domainRange,valueRange){
-    // console.log(domainRange,valueRange)
+  getScaleY(){
     let y = d3
       .scaleLinear()
-      .domain(domainRange)//[-1, 11]
-      .range(valueRange)//[100, -1]
+      .domain(this.config.domainRange)//[-1, 11]
+      .range(this.config.valueRange)//[100, -1]
     y.clamp(true)
     return y
   }
-  getAxisY(rangeConfig,tickFormatCallback){
-    let {tickValueRange,domainRange,valueRange}=rangeConfig
+  getAxisY(){
     let axisY = d3
-      .axisLeft(this.getScaleY(domainRange,valueRange))
-      .tickValues(d3.range(...tickValueRange))
-      .tickSize(-568)
-      .tickFormat(tickFormatCallback)
+      .axisLeft(this.getScaleY())
+      .tickValues(d3.range(...this.config.tickValueRange))
+      .tickSize(this.config.tickSizeY)
+      .tickFormat(this.config.tickFormatCallback)
     return axisY
   }
 }

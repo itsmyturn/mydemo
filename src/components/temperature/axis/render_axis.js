@@ -52,27 +52,23 @@ export class RenderAxis{
   }
   addAxisY(){
     this.addBreathAxisY()
-    this.addTemperatureAxisY()
     this.addPulseAxisY()
+    this.addTemperatureAxisY()
   }
   addPulseAxisY(){
     let axis=new Axis()
-    let rangeConfig={
+    axis.setAxisConfig({
+      tickSizeY:0,
+      tickFormatCallback:function (d){
+        if (d % 20 === 0) {
+          return d
+        }
+      },
       tickValueRange:[12,180,4],
       domainRange:[12, 180],
       valueRange:[500, 0]
-    }
-    axis.setAxisConfig({
-      tickSizeY:0,
+
     })
-    let tickFormatCallback=function (d){
-      if (d % 20 === 0) {
-        return d
-      }
-    }
-    // axis.setAxisConfig({
-    //   tickSizeY:-568
-    // })
     let tickNumberParent=d3.select('.title_temperatureAndPulse')
       .append('div')
       .style('width','55px')
@@ -87,37 +83,32 @@ export class RenderAxis{
       .append('g')
       .classed('tickPulseNumber',true)
       .attr('transform',`translate(54,0)`)
-      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+      .call(axis.getAxisY())
     tickNumberParent.select('.tickPulseNumber').selectAll('.tick')
     .select('line')
     .attr('stroke','none')
     tickNumberParent.select('.tickPulseNumber').selectAll('.tick')
       .select('text')
       .attr('x', '-20')
-    // tickNumberParent.select('.tickTemperatureNumber').select('path')
-    // .attr('stroke','none')
   }
   addTemperatureAxisY(){
     let axis=new Axis()
     let parent=d3.select('.axis_layout_temperatureAndPulse')
-    let rangeConfig={
+    axis.setAxisConfig({
+      tickFormatCallback:function (d){
+        if (Math.floor(d) === d) {
+            return d
+        }
+      },
       tickValueRange:[33.6,42,0.2],
       domainRange:[33.6, 42],
       valueRange:[500, 0]
-    }
-    axis.setAxisConfig({
-      tickSizeY:0,
     })
-    let tickFormatCallback=function (d){
-      if (Math.floor(d) === d) {
-          return d
-      }
-    }
     parent
       .append('g')
       .attr('class', 'temperatureY axisY')
       .attr('transform',`translate(0,0)`)
-      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+      .call(axis.getAxisY())
     d3.select('.temperatureY')
       .selectAll('g.tick')
       .select('line')
@@ -133,7 +124,7 @@ export class RenderAxis{
         if(Math.floor(d)===d){
           return 2
         }else{
-          return 0
+          return 1
         }
       })
     let tickNumberParent=d3.select('.title_temperatureAndPulse')
@@ -150,7 +141,7 @@ export class RenderAxis{
       .append('g')
       .classed('tickTemperatureNumber',true)
       .attr('transform',`translate(30,0)`)
-      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+      .call(axis.getAxisY())
     tickNumberParent.select('.tickTemperatureNumber').selectAll('.tick')
     .select('line')
     .attr('stroke','none')
@@ -160,20 +151,16 @@ export class RenderAxis{
   addBreathAxisY(){
     let axis=new Axis()
     let parent=d3.select('.axis_layout_pain')
-    
-    let rangeConfig={
+    axis.setAxisConfig({
       tickValueRange:[0, 110 / 10, 2],
       domainRange:[-1, 11],
       valueRange:[100, -1]
-    }
-    let tickFormatCallback=function (d){
-      return d
-    }
+    })
     parent
       .append('g')
       .attr('class', 'painY axis')
       .attr('transform',`translate(0,0)`)
-      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+      .call(axis.getAxisY())
     let tickNumberParent=d3.select('.title_pain')
       .append('div')
       .style('width','30px')
@@ -184,12 +171,10 @@ export class RenderAxis{
       .append('svg')
       .attr('width','100%')
       .attr('height','100%')
-      
-
     tickNumberParent
       .append('g')
       .classed('tickNumber',true)
       .attr('transform',`translate(30,0)`)
-      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+      .call(axis.getAxisY())
   }
 }

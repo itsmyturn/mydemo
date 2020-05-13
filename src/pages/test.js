@@ -6,8 +6,6 @@ function axisTest(){
   let renderAxis=new RenderAxis()
   renderAxis.addAxisY()
   renderAxis.addAxisX()
-  
-  
 }
 
 
