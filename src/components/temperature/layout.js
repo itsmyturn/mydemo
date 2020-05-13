@@ -14,6 +14,8 @@ export  class Layout{
     this.titleWrap=null
     this.row=null
     this.colums=null
+    this.createWrap()
+    this.createRowDiv()
     // DrawIconTest() //图标测试
     ConstructorTest()//利用坐标轴布局测试
   }
@@ -47,6 +49,7 @@ export  class Layout{
       })
       .style('font-size','14px')
       .style('padding-left','20px')
+      .style('position','relative')
       .text(function(d){
         return d.nameCn
       })

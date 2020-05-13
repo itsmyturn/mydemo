@@ -31,7 +31,7 @@ export const axisConfig=[{
   'height':500,
   'stepX':4
 },{
-  'nameCn': '疼痛',
+  'nameCn': '疼痛等级',
   'nameEn': 'pain',
   'top':500,
   'height':100,

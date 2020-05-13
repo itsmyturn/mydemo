@@ -4,7 +4,10 @@ import {RenderAxis} from '../components/temperature/axis/render_axis.js' //åæ 
 
 function axisTest(){
   let renderAxis=new RenderAxis()
+  renderAxis.addAxisY()
   renderAxis.addAxisX()
+  
+  
 }
 
 

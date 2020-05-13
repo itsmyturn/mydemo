@@ -27,10 +27,10 @@ export default {
     },
     mounted(){
         this.$nextTick(()=>{
-            let layout=new Layout(axisTest)
-            layout.createWrap()
-            // layout.createRow()
-            layout.createRowDiv()
+            new Layout(axisTest)
+            // layout.createWrap()
+            // // layout.createRow()
+            // layout.createRowDiv()
         })
     }
 }

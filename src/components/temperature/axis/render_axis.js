@@ -8,11 +8,7 @@ export class RenderAxis{
     this.svg=d3.select('.content_auto').append('svg')
     .attr('width','100%')
     .attr('height','100%')
-  }
-  addAxisX(){//在svg中生成坐标轴
-    let axisTickStyle=new AxisTickStyle()
     let h=0
-    
     this.svg.selectAll('.axis_layout')
       .data(axisConfig)
       .enter()
@@ -24,13 +20,17 @@ export class RenderAxis{
         h+=d.top
         return `translate(0,${h})`
       })
+  }
+  addAxisX(){//在svg中生成坐标轴
+    let axisTickStyle=new AxisTickStyle()
+    
     let nodes=d3.selectAll('g.axis_layout').nodes()
     nodes.forEach((node,index)=>{
       //x轴相关
       let axis=new Axis()
       let item=axisConfig[index]
       axis.setAxisConfig({
-        tickSize:item.height-1,
+        tickSizeX:item.height,
         stepX:item.stepX
       })
       d3.select(nodes[index]).append('g')
@@ -51,6 +51,145 @@ export class RenderAxis{
     })
   }
   addAxisY(){
+    this.addBreathAxisY()
+    this.addTemperatureAxisY()
+    this.addPulseAxisY()
+  }
+  addPulseAxisY(){
+    let axis=new Axis()
+    let rangeConfig={
+      tickValueRange:[12,180,4],
+      domainRange:[12, 180],
+      valueRange:[500, 0]
+    }
+    axis.setAxisConfig({
+      tickSizeY:0,
+    })
+    let tickFormatCallback=function (d){
+      if (d % 20 === 0) {
+        return d
+      }
+    }
+    // axis.setAxisConfig({
+    //   tickSizeY:-568
+    // })
+    let tickNumberParent=d3.select('.title_temperatureAndPulse')
+      .append('div')
+      .style('width','55px')
+      .style('height','100%')
+      .style('position','absolute')
+      .style('left','10px')
+      .style('top',0)
+      .append('svg')
+      .attr('width','100%')
+      .attr('height','100%')
+    tickNumberParent
+      .append('g')
+      .classed('tickPulseNumber',true)
+      .attr('transform',`translate(54,0)`)
+      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+    tickNumberParent.select('.tickPulseNumber').selectAll('.tick')
+    .select('line')
+    .attr('stroke','none')
+    tickNumberParent.select('.tickPulseNumber').selectAll('.tick')
+      .select('text')
+      .attr('x', '-20')
+    // tickNumberParent.select('.tickTemperatureNumber').select('path')
+    // .attr('stroke','none')
+  }
+  addTemperatureAxisY(){
+    let axis=new Axis()
+    let parent=d3.select('.axis_layout_temperatureAndPulse')
+    let rangeConfig={
+      tickValueRange:[33.6,42,0.2],
+      domainRange:[33.6, 42],
+      valueRange:[500, 0]
+    }
+    axis.setAxisConfig({
+      tickSizeY:0,
+    })
+    let tickFormatCallback=function (d){
+      if (Math.floor(d) === d) {
+          return d
+      }
+    }
+    parent
+      .append('g')
+      .attr('class', 'temperatureY axisY')
+      .attr('transform',`translate(0,0)`)
+      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+    d3.select('.temperatureY')
+      .selectAll('g.tick')
+      .select('line')
+      .attr('class','yAxisLine')
+      .attr('stroke',function(d){
+        if(Math.floor(d)===d){
+          return '#000'
+        }else{
+          return '#ccc'
+        }
+      })
+      .attr('stroke-width',function(d){
+        if(Math.floor(d)===d){
+          return 2
+        }else{
+          return 0
+        }
+      })
+    let tickNumberParent=d3.select('.title_temperatureAndPulse')
+      .append('div')
+      .style('width','55px')
+      .style('height','100%')
+      .style('position','absolute')
+      .style('right','5px')
+      .style('top',0)
+      .append('svg')
+      .attr('width','100%')
+      .attr('height','100%')
+    tickNumberParent
+      .append('g')
+      .classed('tickTemperatureNumber',true)
+      .attr('transform',`translate(30,0)`)
+      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+    tickNumberParent.select('.tickTemperatureNumber').selectAll('.tick')
+    .select('line')
+    .attr('stroke','none')
+    tickNumberParent.select('.tickTemperatureNumber').select('path')
+    .attr('stroke','none')
+  }
+  addBreathAxisY(){
+    let axis=new Axis()
+    let parent=d3.select('.axis_layout_pain')
+    
+    let rangeConfig={
+      tickValueRange:[0, 110 / 10, 2],
+      domainRange:[-1, 11],
+      valueRange:[100, -1]
+    }
+    let tickFormatCallback=function (d){
+      return d
+    }
+    parent
+      .append('g')
+      .attr('class', 'painY axis')
+      .attr('transform',`translate(0,0)`)
+      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
+    let tickNumberParent=d3.select('.title_pain')
+      .append('div')
+      .style('width','30px')
+      .style('height','100%')
+      .style('position','absolute')
+      .style('right',0)
+      .style('top',0)
+      .append('svg')
+      .attr('width','100%')
+      .attr('height','100%')
+      
 
+    tickNumberParent
+      .append('g')
+      .classed('tickNumber',true)
+      .attr('transform',`translate(30,0)`)
+      .call(axis.getAxisY(rangeConfig,tickFormatCallback))
   }
 }

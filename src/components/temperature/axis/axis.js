@@ -8,15 +8,16 @@ export class Axis{
     this.baseConfig={
       beginTime:new Date('2020-05-10 00:00:00'),//初始化传入
       endTime:new Date('2020-05-17 00:00:00'),//初始化传入
-      containerWidth:'568',//初始化传入
-      containerHeight:'50',//单独设置
+      containerWidth:568,//初始化传入
+      containerHeight:50,//单独设置
       domainMax:'',//单独设置
       domainMin:'',//单独设置
       stepX:24,//多大间隔画x轴线 单位h 默认一天
       stepY:'',//多大间隔画y轴线
       start:'',//刻度起点
       end:'',
-      tickSize:10//刻度终点
+      tickSizeX:100,
+      tickSizeY:-568
     }
     this.config=Object.assign({},this.baseConfig)
     
@@ -36,16 +37,28 @@ export class Axis{
     let axisX=d3 
       .axisBottom(this.getScaleX())
       .tickValues(d3.timeHour.range(this.config.beginTime,this.config.endTime,this.config.stepX))
-      .tickSize(this.config.tickSize)
+      .tickSize(this.config.tickSizeX)
       .tickFormat(function () {
         return 
       })
     return axisX
   }
-  getScaleY(){
-
+  getScaleY(domainRange,valueRange){
+    // console.log(domainRange,valueRange)
+    let y = d3
+      .scaleLinear()
+      .domain(domainRange)//[-1, 11]
+      .range(valueRange)//[100, -1]
+    y.clamp(true)
+    return y
   }
-  setAxisY(){
-
+  getAxisY(rangeConfig,tickFormatCallback){
+    let {tickValueRange,domainRange,valueRange}=rangeConfig
+    let axisY = d3
+      .axisLeft(this.getScaleY(domainRange,valueRange))
+      .tickValues(d3.range(...tickValueRange))
+      .tickSize(-568)
+      .tickFormat(tickFormatCallback)
+    return axisY
   }
 }
