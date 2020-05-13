@@ -17,17 +17,17 @@
     </div>
 </template>
 <script>
-import {adaptData,Layout} from './test.js'
+import {axisTest} from './test.js'
+import {Layout} from '../components/temperature/layout.js'
 export default {
     data(){
         return{
-           adaptData,
            icons:['腋温','口温','肛温','降温','脉搏','心率','心率起搏器','疼痛','镇痛','腋温脉搏重叠','口温脉搏重叠','肛温脉搏重叠','心率脉搏重叠','疼痛镇痛重叠']
         }
     },
     mounted(){
         this.$nextTick(()=>{
-            let layout=new Layout()
+            let layout=new Layout(axisTest)
             layout.createWrap()
             // layout.createRow()
             layout.createRowDiv()

@@ -1,5 +1,5 @@
 
-let dataSource = {
+export let dataSource = {
   'charType': '2',
   'logoSrc': null,
   'chartData': [
@@ -414,7 +414,4 @@ let dataSource = {
       'YE_TI_RU_LIANG_ml': []
     }
   }
-}
-export {
-  dataSource
 }
