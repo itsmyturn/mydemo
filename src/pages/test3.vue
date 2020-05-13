@@ -1,7 +1,8 @@
 <template>
     <div class="test3">
         <div class="temperature_wrap">
-            <div class="left_title"></div>
+            <div class="left_title_div"></div>
+            <!-- <div class="left_title"></div> -->
             <div class="right_content">
                 <div class="content_auto">
                     
@@ -28,41 +29,51 @@ export default {
         this.$nextTick(()=>{
             let layout=new Layout()
             layout.createWrap()
-            layout.createRow()
+            // layout.createRow()
+            layout.createRowDiv()
         })
     }
 }
 </script>
 <style scoped>
-.test3{
+.test3{/*需要考虑a4纸的大小*/
     width: 1000px;
     margin:0 auto;
     display:flex;
     flex-direction: row;
     text-align: left;
+    height:950px;
+    overflow: hidden;
 }
 .temperature_wrap{
     display:flex;
     flex-direction: row;
     width:700px;
-    height:900px;
-    border:1px solid #000;
+    height:950px;
+    /* border:1px solid #000; */
     overflow:hidden;
 }
-.left_title{
-    width: 130px;
-    height:100%;
+.left_title_div{
     border:1px solid #000;
+    border-right:none;
+    border-bottom:none;
+    text-align: left;
+}
+.left_title,.left_title_div{
+    width: 130px;
+    height:900px;
 }
 .right_content{
     flex:1;
-    overflow:hidden;/*auto*/
-    border:1px solid #0f0;
+    overflow:auto;/*auto*/
+    /* border:1px solid #0f0; */
+    
 
 }
 .content_auto{
-    width:800px;
-    height:100%;
+    width:100%;
+    height:900px;
+    border-bottom:1px solid #000;
 }
 .legend{
     width: 200px;
@@ -76,4 +87,5 @@ export default {
 .legend p {
     line-height:20px;
 }
+
 </style>

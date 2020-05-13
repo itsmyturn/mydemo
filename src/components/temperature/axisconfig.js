@@ -11,7 +11,7 @@ export const axisConfig=[{
   'top':rowHeight,
   'height':rowHeight,
   'stepX':24
-}, {
+  }, {
   'nameCn': '术后日数',
   'nameEn': 'shouShu',
   'top':rowHeight,
@@ -26,7 +26,7 @@ export const axisConfig=[{
   'stepX':4
 },{
   'nameCn': '疼痛',
-  'nameEn': 'temperatureAndPulse',
+  'nameEn': 'pain',
   'top':520,
   'height':100,
   'stepX':4

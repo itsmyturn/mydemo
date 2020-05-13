@@ -30,7 +30,7 @@ function axisTest(){
     let axis=new Axis()
     let item=axisConfig[index]
     axis.setAxisConfig({
-      tickSize:item.height,
+      tickSize:item.height-1,
       stepX:item.stepX
     })
     d3.select(nodes[index]).append('g')
@@ -43,34 +43,32 @@ function axisTest(){
     .attr('class', 'xAxisLine')
     .attr('stroke', function (d,i) {
       let arr=['date','zhuYuanTianshu','shouShu','TI_GE_JIAN_CHATI_ZHONG','TI_GE_JIAN_CHASHEN_GAO','YE_TI_RU_LIANG_ml','NIAO_LIANG_ml','DA_BIAN_CI_SHU','PI_SHI_JIE_GUO','XUE_TANG_JIAN_CE_ZHImmolL','TE_SHU_ZHI_LIAO']
-      let arr2=['temperatureAndPulse','temperatureAndPulse','hx']
+      let arr2=['temperatureAndPulse','pain','hx']
       let arr3=['xueYa']
       if(arr2.includes(item.nameEn)){
-        if(i%6===0){
+        if(i%6===0&&i!==0){
           return 'red'
         }else{
           return '#ccc'
         }
       }
       if(arr.includes(item.nameEn)){
-        return 'red'
+        if(i!==0){
+          return 'red'
+        }else{
+          return '#ccc'
+        }
+        
       }
       
       if(arr3.includes(item.nameEn)){
-        if(i%2===0){
+        if(i%2===0&&i!==0){
           return 'red'
         }else{
           return '#000'
         }
 
       }
-      // console.log(i,d)
-      // if(i%4===0){
-      //   return 'red'
-      // }else{
-      //   return '#000'
-      // }
-      
     })
     .attr('stroke-width', 2)
   })
@@ -89,12 +87,38 @@ class Layout{
     axisTest()//利用坐标轴布局测试
   }
   createWrap(){
-    this.titleWrap=d3
-      .select('.left_title')
-      .append('svg')
-      .attr('class','left_wrap_svg')
-      .attr('width','100%')
-      .attr('height','100%')
+    // this.titleWrap=d3
+    //   .select('.left_title')
+    //   .append('svg')
+    //   .attr('class','left_wrap_svg')
+    //   .attr('width','100%')
+    //   .attr('height','100%')
+    this.titleWrapDiv=d3
+      .select('.left_title_div')
+  }
+  createRowDiv(){
+    this.row=this.titleWrapDiv
+      .selectAll('div')
+      .data(axisConfig)
+      .enter()
+      .append('div')
+      .attr('class',(d)=>{
+        return `title_${d.nameEn} title`
+      })
+      .style('height',function(d){
+          return `${d.height}px`
+      })
+      .style('width','100%')
+      .style('border-bottom','1px solid #000')
+      .style('box-sizing','border-box')
+      .style('line-height',function(d){
+        return `${d.height}px`
+      })
+      .style('font-size','14px')
+      .style('padding-left','20px')
+      .text(function(d){
+        return d.nameCn
+      })
   }
   createRow(){
     this.row=this.titleWrap
@@ -121,7 +145,7 @@ class Layout{
       .attr('transform',function(){
         return `translate(0,${adaptSize.getTmpTop()})`
       })
-    d3.selectAll('.title_temperature')
+    d3.selectAll('.title_temperature')//体温脉搏
       .append('rect')
       .attr('width',()=>{
         return adaptSize.getTitleWidth()
@@ -130,7 +154,7 @@ class Layout{
         return adaptSize.getTmpHeight()
       })
       .attr('fill','none')
-      .attr('stroke','yellow')
+      .attr('stroke','#000')
     d3.selectAll('.title_temperature')
       .append('text')
       .attr('x',()=>{
@@ -156,7 +180,7 @@ class Layout{
         return adaptSize.getPainHeight()
       })
       .attr('fill','none')
-      .attr('stroke','blue')
+      .attr('stroke','#000')
     d3.selectAll('.title_pain')
       .append('text')
       .attr('x',()=>{
@@ -186,7 +210,7 @@ class Layout{
         
       })
       .attr('fill','none')
-      .attr('stroke','red')
+      .attr('stroke','#000')
     d3.selectAll('g.title')
       .filter((d)=>{
         return d
