@@ -1,16 +1,84 @@
 let rowHeight=20
-export const axisConfig=[{
+let data=[{
+  'datetime': '2020-04-20 00:00:00',
+  'value': 34
+}, {
+  'datetime': '2020-04-21 00:00:00',
+  'value': 35
+}, {
+  'datetime': '2020-04-22 00:00:00',
+  'value': 36
+}, {
+  'datetime': '2020-04-23 00:00:00',
+  'value': 37
+}, {
+  'datetime': '2020-04-24 00:00:00',
+  'value': 38
+}, {
+  'datetime': '2020-04-25 00:00:00',
+  'value': 39
+}, {
+  'datetime': '2020-04-26 00:00:00',
+  'value': 40
+}]
+const axisConfig=[{
   'nameCn': '日期',
   'nameEn': 'date',
   'top':0,
+  'width':570/7,
   'height':rowHeight,
-  'stepX':24
-}, {
+  'stepX':24,
+  'data':[{
+      'datetime': '2020-04-20 00:00:00',
+      'value': '2020-04-20 00:00:00'
+    }, {
+      'datetime': '2020-04-21 00:00:00',
+      'value': '2020-04-21 00:00:00'
+    }, {
+      'datetime': '2020-04-22 00:00:00',
+      'value': '2020-04-22 00:00:00'
+    }, {
+      'datetime': '2020-04-23 00:00:00',
+      'value': '2020-04-23 00:00:00'
+    }, {
+      'datetime': '2020-04-24 00:00:00',
+      'value': '2020-04-24 00:00:00'
+    }, {
+      'datetime': '2020-04-25 00:00:00',
+      'value': '2020-04-25 00:00:00'
+    }, {
+      'datetime': '2020-04-26 00:00:00',
+      'value': '2020-04-26 00:00:00'
+    }]
+  }, {
   'nameCn': '住院天数',
   'nameEn': 'zhuYuanTianshu',
   'top':rowHeight,
+  'width':570/7,
   'height':rowHeight,
-  'stepX':24
+  'stepX':24,
+  data:[{
+    'datetime': '2020-04-20 00:00:00',
+    'value': 34
+  }, {
+    'datetime': '2020-04-21 00:00:00',
+    'value': 35
+  }, {
+    'datetime': '2020-04-22 00:00:00',
+    'value': 36
+  }, {
+    'datetime': '2020-04-23 00:00:00',
+    'value': 37
+  }, {
+    'datetime': '2020-04-24 00:00:00',
+    'value': 38
+  }, {
+    'datetime': '2020-04-25 00:00:00',
+    'value': 39
+  }, {
+    'datetime': '2020-04-26 00:00:00',
+    'value': 40
+  }]
   }, {
   'nameCn': '术后日数',
   'nameEn': 'shouShu',
@@ -97,3 +165,11 @@ export const axisConfig=[{
   'height':rowHeight,
   'stepX':24
 }]
+
+axisConfig.forEach((item,index)=>{
+  if(index>1){
+    item.data=data
+    item.width=570/7
+  }
+})
+export{axisConfig}

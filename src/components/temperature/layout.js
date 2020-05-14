@@ -15,7 +15,7 @@ export  class Layout{
     this.createWrap()
     this.createRowDiv()
     // DrawIconTest() //图标测试
-    ConstructorTest()//利用坐标轴布局测试
+    ConstructorTest()//利用坐标轴布局 测试
   }
   createWrap(){
     this.titleWrapDiv=d3

@@ -5,8 +5,8 @@ export class Axis{
     //如果传过来的数据小于7天，那就展示7天的，容器宽度需要自动计算？
     //getEndTime('2020-05-12 00:00:00')
     this.baseConfig={
-      beginTime:new Date('2020-05-10 00:00:00'),//初始化传入
-      endTime:new Date('2020-05-17 00:00:00'),//初始化传入
+      beginTime:new Date('2020-04-20 00:00:00'),//初始化传入
+      endTime:new Date('2020-04-27 00:00:00'),//初始化传入
       containerWidth:568,//初始化传入
       containerHeight:50,//单独设置
       domainMax:'',//单独设置
