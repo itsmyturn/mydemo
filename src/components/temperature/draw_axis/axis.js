@@ -1,9 +1,8 @@
 //import {getEndTime} from './util.js'
 import * as d3 from 'd3'
-
 export class Axis{
   constructor(){
-    //如果穿过来的数据小于7天，那就展示7天的，容器宽度需要自动计算？
+    //如果传过来的数据小于7天，那就展示7天的，容器宽度需要自动计算？
     //getEndTime('2020-05-12 00:00:00')
     this.baseConfig={
       beginTime:new Date('2020-05-10 00:00:00'),//初始化传入

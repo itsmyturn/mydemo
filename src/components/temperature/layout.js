@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import {dataSource} from './datasource2.js'
-import {AdaptData,AdaptSize} from './adaptData.js'
-import {axisConfig} from './axis/axisconfig.js'
+import {AdaptData} from './adaptData.js'
+import {axisConfig} from './draw_axis/axisconfig.js'
 //插入数据结构
 //适配体温单需要的数据
 let adaptData=new AdaptData(dataSource)
@@ -18,12 +18,6 @@ export  class Layout{
     ConstructorTest()//利用坐标轴布局测试
   }
   createWrap(){
-    // this.titleWrap=d3
-    //   .select('.left_title')
-    //   .append('svg')
-    //   .attr('class','left_wrap_svg')
-    //   .attr('width','100%')
-    //   .attr('height','100%')
     this.titleWrapDiv=d3
       .select('.left_title_div')
   }
@@ -49,7 +43,12 @@ export  class Layout{
       .style('padding-left','20px')
       .style('position','relative')
       .text(function(d){
-        return d.nameCn
+        if(d.nameEn==='temperatureAndPulse'){
+          return 
+        }else{
+          return d.nameCn
+        }
+        
       })
   }
   createColum(){
