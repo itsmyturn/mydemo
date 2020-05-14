@@ -303,6 +303,7 @@ Chart.prototype = {
         let amArr = filterTime('am', arr).splice(-1)
         let pmArr = filterTime('pm', arr).splice(-1)
         let lastArr = [...amArr, ...pmArr]
+        console.log('last',lastArr)
         let bloodNodes = d3.selectAll('g.textData').nodes()
         d3.select(bloodNodes[index])
           .selectAll('text.bloodData')

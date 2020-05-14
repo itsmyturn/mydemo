@@ -4,7 +4,7 @@ let data=[{
   'value': 34
 }, {
   'datetime': '2020-04-21 00:00:00',
-  'value': 35
+  'value': ''
 }, {
   'datetime': '2020-04-22 00:00:00',
   'value': 36
