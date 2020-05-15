@@ -51,7 +51,15 @@ export class TimeBar{
       .append('text')
       .attr('x', width / 42 / 2)
       .attr('y', height / 2)
-      .attr('fill', '#000')
+      .attr('fill', function(d,i){
+        //d表示当前数字，i表示索引，不能用数字作为判断条件
+        if(d===2||d===18||d===22){
+          return 'red'
+        }else{
+          return '#000'
+        }
+
+      })
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .attr('font-size', '10')
