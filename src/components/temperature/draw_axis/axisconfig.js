@@ -90,7 +90,8 @@ const axisConfig=[{
   'nameEn': 'time',
   'top':rowHeight,
   'height':rowHeight,
-  'stepX':4
+  'stepX':4,
+  'timeBarType':'start2of12'
 },
 {
   'nameCn': '体温脉搏',

@@ -1,8 +1,15 @@
 import * as d3 from 'd3'
+import {axisConfig} from '../draw_axis/axisconfig.js'
 export class TimeBar{
   constructor(){
     this.timeAxisData = []
-    this.createTime('start3of12')
+    this.data=[]
+    axisConfig.forEach(item=>{
+      if(item.nameEn==='time'){
+        this.createTime(item.timeBarType ||'start2of24')
+      }
+    })
+    
   }
   renderData(){
     let width=570
