@@ -1,35 +1,8 @@
 import * as d3 from 'd3'
-// import {Axis} from '../draw_axis/axis.js'
-// import {axisConfig} from '../draw_axis/axisconfig.js'
-// let data=[{
-//   'datetime': '2020-04-20 00:00:00',
-//   'value': 2
-// }, {
-//   'datetime': '2020-04-20 04:00:00',
-//   'value': 6
-// }, {
-//   'datetime': '2020-04-20 08:00:00',
-//   'value': 10
-// }, {
-//   'datetime': '2020-04-20 12:00:00',
-//   'value': 14
-// }, {
-//   'datetime': '2020-04-20 16:00:00',
-//   'value': 18
-// }, {
-//   'datetime': '2020-04-20 20:00:00',
-//   'value': 22
-// }]
-const timeAxisData = []
-for (var i = 1; i <= 7; i++) {
-  for (var j = 1; j <= 6; j++) {
-    timeAxisData.push(j * 4 - 2)
-  }
-}
-console.log(timeAxisData,'data')
 export class TimeBar{
   constructor(){
-
+    this.timeAxisData = []
+    this.createTime('start3of12')
   }
   renderData(){
     let width=570
@@ -37,7 +10,7 @@ export class TimeBar{
     let timeBar =d3
       .select('g.axis_layout_time')
       .selectAll('g.time_bar')
-      .data(timeAxisData)
+      .data(this.timeAxisData)
       .enter()
       .append('g')
       .attr('class','time_bar')
@@ -52,20 +25,55 @@ export class TimeBar{
       .attr('x', width / 42 / 2)
       .attr('y', height / 2)
       .attr('fill', function(d,i){
-        //d表示当前数字，i表示索引，不能用数字作为判断条件
-        if(d===2||d===18||d===22){
+        const baseNum=i%6
+        if(baseNum===0||baseNum===4||baseNum===5){
           return 'red'
-        }else{
-          return '#000'
         }
-
       })
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .attr('font-size', '10')
       .text(function (d) {
-        console.log(d)
         return d
       })
+  }
+  createTime(type){
+    
+    for (var i = 1; i <= 7; i++) {
+      for (var j = 1; j <= 6; j++) {
+        switch(type){
+            case 'start2of24':
+              this.timeAxisData.push(j * 4 - 2)
+              break
+            case 'start2of12':
+              if(j>3){
+                this.timeAxisData.push((j%4+1)*4-2)
+              }else{
+                this.timeAxisData.push(j * 4 - 2)
+              }
+              break
+            case 'start3of24':
+              this.timeAxisData.push(j * 4 - 1)  
+              break
+            case 'start3of12':
+              if(j>3){
+                this.timeAxisData.push((j%4+1)*4-1)
+              }else{
+                this.timeAxisData.push(j * 4 - 1)
+              }  
+              break
+            case 'start4of24':
+              this.timeAxisData.push(j * 4) 
+              break
+            case 'start4of12':
+              if(j>3){
+                this.timeAxisData.push((j%4+1)*4)
+              }else{
+                this.timeAxisData.push(j * 4)
+              }
+              break
+        }
+      }
+    }
   }
 }
