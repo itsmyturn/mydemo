@@ -109,13 +109,64 @@ const axisConfig=[{
   'nameEn': 'hx',
   'top':100,
   'height':rowHeight*2,
-  'stepX':4
+  'stepX':4,
+  data:[{
+    'datetime': '2020-04-20 04:01:00',
+    'value': 34
+  }, {
+    'datetime': '2020-04-21 12:00:00',
+    'value': 20
+  }, {
+    'datetime': '2020-04-22 00:00:00',
+    'value': 36
+  }, {
+    'datetime': '2020-04-23 08:00:00',
+    'value': 37
+  }, {
+    'datetime': '2020-04-24 00:00:00',
+    'value': 'R'
+  }, {
+    'datetime': '2020-04-25 00:00:00',
+    'value': 39
+  }, {
+    'datetime': '2020-04-26 00:00:00',
+    'value': 40
+  }]
 }, {
   'nameCn': '血压(mmHg)',
   'nameEn': 'xueYa',
   'top':rowHeight*2,
   'height':rowHeight,
-  'stepX':12
+  'stepX':12,
+  'data':[{
+    'datetime': '2020-04-20 00:00:00',
+    'value': [
+      {
+        'datetime': '2020-04-20 06:00:00',
+        'value': {min:80,max:90}
+      },
+      {
+        'datetime': '2020-04-20 10:00:00',
+        'value': {min:77,max:66}
+      },
+      {
+        'datetime': '2020-04-20 15:00:00',
+        'value': []
+      }
+    ]
+  },{
+    'datetime': '2020-04-22 00:00:00',
+    'value': [
+      {
+        'datetime': '2020-04-22 10:00:00',
+        'value': {min:80,max:150}
+      },
+      {
+        'datetime': '2020-04-22 15:00:00',
+        'value': {min:90,max:160}
+      }
+    ]
+  }]
 }, {
   'nameCn': '体重(kg)',
   'nameEn': 'TI_GE_JIAN_CHATI_ZHONG',
@@ -168,7 +219,7 @@ const axisConfig=[{
 
 axisConfig.forEach((item,index)=>{
   if(index>1){
-    item.data=data
+    item.data=item.data||data
     item.width=570/7
   }
 })
