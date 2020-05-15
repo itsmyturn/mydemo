@@ -2,6 +2,7 @@ import bloodData from "../data/blood_pressure.json"
 import date from "../data/date.json"
 import breathData from "../data/breath.json"
 import data from "../data/normal.json"
+import painData from "../data/pain.json"
 let rowHeight=20
 const axisConfig=[{
   "nameCn": "日期",
@@ -44,7 +45,8 @@ const axisConfig=[{
   "nameEn": "pain",
   "top":500,
   "height":100,
-  "stepX":4
+  "stepX":4,
+  "data":painData
 },{
   "nameCn": "呼吸(次/min) ",
   "nameEn": "hx",

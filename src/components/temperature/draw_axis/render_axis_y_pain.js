@@ -2,11 +2,12 @@ import * as d3 from 'd3'
 import {Axis} from './axis.js'
 export class PainAxisY{
   constructor(){
+    this.axis=new Axis()
   }
   render(){
-    let axis=new Axis()
+    
     let parent=d3.select('.axis_layout_pain')
-    axis.setAxisConfig({
+    this.axis.setAxisConfig({
       tickValueRange:[0, 110 / 10, 2],
       domainRange:[-1, 11],
       valueRange:[100, -1]
@@ -15,7 +16,7 @@ export class PainAxisY{
       .append('g')
       .attr('class', 'painY axis')
       .attr('transform',`translate(0,0)`)
-      .call(axis.getAxisY())
+      .call(this.axis.getAxisY())
     d3.select('.painY')
       .selectAll('g.tick')
       .select('line')
@@ -42,7 +43,7 @@ export class PainAxisY{
       .append('g')
       .classed('tickNumber',true)
       .attr('transform',`translate(30,0)`)
-      .call(axis.getAxisY())
+      .call(this.axis.getAxisY())
   }
   
 }
