@@ -77,3 +77,21 @@ export class TimeBar{
     }
   }
 }
+//另外一种算法
+// function getNumber(num,start){
+//   // num 指的是 24小时 ，还是 12小时制的
+//   // start 从几点开始
+//   const timeAxisData = []
+//   if(num==12){
+//   for (var i = 1; i <= 7; i++) {
+//   for (var j = 0; j < 3; j++) {
+//   timeAxisData.push(start + j * 4 )
+//   }
+//   for (var j = 0; j < 3; j++) {
+//   timeAxisData.push(start + j * 4 )
+//   }
+//   }
+//   }
+//   console.log(timeAxisData,'dada')
+//   }
+//   getNumber(12,4)
