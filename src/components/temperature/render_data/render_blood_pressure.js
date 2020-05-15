@@ -11,15 +11,14 @@ export class BloodPressure{
       }
     })
   }
-  renderData(){ 
+  renderData(){
       let axis=new Axis()
       d3.select('.axis_layout_xueYa')
         .selectAll('g.bloodData')
-        .data(this.data)
-        .enter()
-        .filter(function(d){
-          return d.value
+        .data(()=>{
+          return this.data.filter((d)=>d.value)
         })
+        .enter()
         .append('g')
         .classed('bloodData',true)
         .attr('transform',(d,index)=>{

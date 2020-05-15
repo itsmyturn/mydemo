@@ -28,9 +28,6 @@ export default {
     mounted(){
         this.$nextTick(()=>{
             new Layout(axisTest)
-            // layout.createWrap()
-            // // layout.createRow()
-            // layout.createRowDiv()
         })
     }
 }

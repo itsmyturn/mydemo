@@ -36,9 +36,5 @@ export class AxisX{
       })
     })
     new RenderData().renderData()
-    // this.renderDataTest()
-  }
-  renderDataTest(){
-    this.render7ColumsData()
   }
 }
