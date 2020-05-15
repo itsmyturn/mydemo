@@ -23,16 +23,12 @@ export class Breath{
         .attr('class', 'textData')
         .attr('x', function (d) {
           const time = modHour(d)
-          
           return axis.getScaleX()(time)
         })
         .attr('y', function (d,i) {
-          // console.log(i,'i')
           if (i % 2 === 0) {
-            console.log('上',i,d.value)
             return 10
           } else {
-            console.log('下',i)
             return 30
           }
         })
