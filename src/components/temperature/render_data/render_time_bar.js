@@ -38,7 +38,6 @@ export class TimeBar{
       })
   }
   createTime(type){
-    
     for (var i = 1; i <= 7; i++) {
       for (var j = 1; j <= 6; j++) {
         switch(type){
@@ -83,15 +82,15 @@ export class TimeBar{
 //   // start 从几点开始
 //   const timeAxisData = []
 //   if(num==12){
-//   for (var i = 1; i <= 7; i++) {
-//   for (var j = 0; j < 3; j++) {
-//   timeAxisData.push(start + j * 4 )
-//   }
-//   for (var j = 0; j < 3; j++) {
-//   timeAxisData.push(start + j * 4 )
-//   }
-//   }
+//     for (var i = 1; i <= 7; i++) {
+//       for (var j = 0; j < 3; j++) {
+//       timeAxisData.push(start + j * 4 )
+//       }
+//       for (var j = 0; j < 3; j++) {
+//       timeAxisData.push(start + j * 4 )
+//       }
+//     }
 //   }
 //   console.log(timeAxisData,'dada')
-//   }
-//   getNumber(12,4)
+// }
+// getNumber(12,3)
