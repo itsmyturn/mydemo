@@ -12,7 +12,7 @@
         </div>
         <div class="legend">
             <div class="icon" v-for="item in icons" :key="item">
-                <!-- <p>{{item}}</p> -->
+                <p>{{item}}</p>
             </div>
         </div>
     </div>
@@ -28,7 +28,8 @@ export default {
     },
     mounted(){
         this.$nextTick(()=>{
-            new Layout(axisTest)
+            new Layout()
+            axisTest()
         })
     },
     methods:{

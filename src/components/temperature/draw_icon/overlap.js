@@ -25,8 +25,8 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
     let cross=new Cross()
     let circle=new Circle()
     cross.setBaseConfig({
-      skewX:-3,
-      skewY:-3
+      skewX:-2,
+      skewY:-2
     })
     cross.draw(root,config)
     circle.draw(root,config)
@@ -67,7 +67,8 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
     let circle=new Circle()
     cross.setBaseConfig({
       rotate:45,
-      stroke:'red'
+      stroke:'red',
+      skewY:-4
     })
     
     cross.draw(root,config)

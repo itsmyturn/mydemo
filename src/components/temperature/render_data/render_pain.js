@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
+import Point from '../point.js'
 export class Pain{
   constructor(){
     this.data=[]
@@ -19,19 +20,18 @@ export class Pain{
   }
   renderData(){
     this.renderLine()
+    this.renderPoint()
   }
   renderLine(){
     this.painLine = d3
       .line()
       .defined(function (d) {
-        console.log('d',d)
         return d.pain != null
       })
       .x((d)=> {
         return this.axis.getScaleX()(new Date(d.datetime))
       })
       .y( (d)=> {
-        console.log('y',this.axis.getScaleY()(d.pain))
         return this.axis.getScaleY()(d.pain)//
       })
     d3.select('.axis_layout_pain')
@@ -44,5 +44,43 @@ export class Pain{
       .attr('stroke-width', 1)
       .attr('class', 'painLine')
       .attr('d', this.painLine(this.data))
+  }
+  renderPoint(){
+    console.log('渲染疼痛点')
+    let parent=d3.select('.axis_layout_pain')
+     // 绘制疼痛数据点
+     parent
+     .append('g')
+     .attr('class', 'CirclesWrap')
+     .selectAll('g')
+     .data(this.data)
+     .enter()
+     .filter(function (d) {
+       return d.pain !== null && d.pain >= 0
+     })
+     .append('g')
+     .attr('stroke', 'green')
+     .attr('fill', 'green')
+     .attr('transform', (d)=> {
+       let point=new Point()
+       let x = this.axis.getScaleX()(new Date(d.datetime))
+       let y = this.axis.getScaleY()(d.pain)
+       point.draw(parent,'pain',{x,y})
+      //  if (d.pain === d.zt) {
+      //    that.drawIcon(x, y, 'painAndZt')
+      //  } else {
+      //    that.drawPlus(x, y)
+      //  }
+       return 'translate(' + x + ', ' + y + ')'
+     })
+     .attr('cx', (d)=> {
+       return this.axis.getScaleX(new Date(d.datetime))
+     })
+     .attr('cy', (d)=> {
+       return this.axis.getScaleY(d.pain)
+     })
+     .attr('r', function () {
+       return 5
+     })
   }
 }

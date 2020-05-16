@@ -4,7 +4,10 @@ export default class Pain{//疼痛
     this.baseConfig={
       'fill':'red',
       'stroke':'red',
-      'rotate':45
+      'rotate':45,
+      'strokeWidth':2,
+      'skewX':2,
+      'skewY':-3
     }
     this.cross=new Cross(this.baseConfig)
     

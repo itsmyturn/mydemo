@@ -6,7 +6,7 @@ import {axisConfig} from './draw_axis/axisconfig.js'
 //适配体温单需要的数据
 let adaptData=new AdaptData(dataSource)
 export  class Layout{
-  constructor(ConstructorTest){
+  constructor(){
     this.titleData=adaptData.getDynamicHeader()
     this.wrap=null
     this.titleWrap=null
@@ -15,7 +15,7 @@ export  class Layout{
     this.createWrap()
     this.createRowDiv()
     // DrawIconTest() //图标测试
-    ConstructorTest()//利用坐标轴布局 测试
+    // ConstructorTest()//利用坐标轴布局 测试
   }
   createWrap(){
     this.titleWrapDiv=d3

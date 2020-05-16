@@ -139,7 +139,7 @@ Chart.prototype = {
       .data(this.config)
       .enter()
       .append('g')
-      .attr('class', function (d, i) {
+      .attr('class', function (d) {
         return 'itemWrap' + ' ' + d.nameEn
       })
       .attr('transform', function (d, i) {
@@ -188,7 +188,7 @@ Chart.prototype = {
           return that.columWidth
         }
       })
-      .attr('height', function (d, i) {
+      .attr('height', function () {
         return that.rowHeight
       })
       .attr('stroke', this.style.lineColor)
@@ -219,7 +219,7 @@ Chart.prototype = {
     }
     this.drawEvent(this.statusUp, 'up')
     this.drawEvent(this.statusDown, 'down')
-    this.dataSource.forEach(function (d, i) {
+    this.dataSource.forEach(function (d) {
       // 绘制数据线
       that.drawDataLines(d)
       // 绘制数据点
@@ -233,10 +233,10 @@ Chart.prototype = {
       .select('g.itemTitle')
       .append('text')
       .attr('class', 'textTitle')
-      .attr('x', function (d, i) {
+      .attr('x', function () {
         return that.titleWidth / 2
       })
-      .attr('y', function (d, i) {
+      .attr('y', function (d) {
         if (d.nameEn === 'hx') {
           return that.rowHeight
         } else {
@@ -251,7 +251,7 @@ Chart.prototype = {
       .attr('font-size', '14')
   },
   // 插入数据
-  appendData: function (val, index) {
+  appendData: function () {
     const that = this
     let nodes = d3.selectAll('g.itemWrap').nodes()
     this.config.map(function (key, index) {
@@ -264,7 +264,7 @@ Chart.prototype = {
       } else {
         appendOtherData(that, key, index)
       }
-      function appendBreathData (that, key, index) {
+      function appendBreathData (that, key) {
         d3.select('g.wrap')
             .select('g.hx')
             .selectAll('text.textData')
@@ -335,7 +335,7 @@ Chart.prototype = {
           .attr('dominant-baseline', 'middle')
           .attr('font-size', '10')
       }
-      function appendBloodPressData (that, key, index) {
+      function appendBloodPressData (that) {
         d3.select('g.wrap')
             .select('g.xueYa')
             .selectAll('g.textData')
@@ -372,7 +372,7 @@ Chart.prototype = {
               const time = modHour(d, 0)
               return that.x(time) + that.titleWidth + that.columWidth / 2
             })
-            .attr('y', function (d) {
+            .attr('y', function () {
               return that.rowHeight / 2
             })
             .text(function (d, i) {
@@ -435,7 +435,7 @@ Chart.prototype = {
       .axisBottom(this.x)
       .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 4))//4小时一个格子
       .tickSize(h)
-      .tickFormat(function (d, i) {
+      .tickFormat(function () {
         return
       })
     
@@ -444,7 +444,7 @@ Chart.prototype = {
       .axisLeft(this.y1)
       .tickValues(d3.range(tw.min, tw.max, 0.2))
       .tickSize(-this.width)
-      .tickFormat(function (d, i) {
+      .tickFormat(function (d) {
         if (Math.floor(d) === d) {
           return d
         }
@@ -454,7 +454,7 @@ Chart.prototype = {
       .axisLeft(this.y2)
       .tickValues(d3.range(mb.min, mb.max, 4))
       .tickSize(0)
-      .tickFormat(function (d, i) {
+      .tickFormat(function (d) {
         if (d % 20 === 0) {
           return d
         }
@@ -492,7 +492,7 @@ Chart.prototype = {
       .axisBottom(this.x)
       .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 12))
       .tickSize(this.rowHeight)
-      .tickFormat(function (d, i) {
+      .tickFormat(function () {
         return
       })
 
@@ -525,7 +525,7 @@ Chart.prototype = {
       })
       .append('g')
       .attr('class', 'textItem')
-      .attr('transform', function (d, i) {
+      .attr('transform', function (d) {
         var x = that.x(modHour(d)) - 5
         if (command === 'up') {
           return 'translate(' + x + ',10)'
@@ -581,7 +581,7 @@ Chart.prototype = {
     var data = info.data
     var type = info.code
     // 数据转换
-    data.forEach(function (d, i) {
+    data.forEach(function (d) {
       if (type === 'temperature') {
         var val = d.yw || d.gw || d.kw
         d.svgValue = val
@@ -632,7 +632,7 @@ Chart.prototype = {
           return val && val >= 35 && val <= 42
         })
         .append('g')
-        .attr('transform', function (d, i) {
+        .attr('transform', function (d) {
           var x = that.x(new Date(d.datetime))
           var y = that.y1(d.svgValue)
           var mby = that.y2(d.ml)
@@ -686,7 +686,7 @@ Chart.prototype = {
           return d.ml
         })
         .append('g')
-        .attr('transform', function (d, i) {
+        .attr('transform', function (d) {
           var x = that.x(new Date(d.datetime))
           // var y1 = that.y1(d.svgValue)// 体温
           var y = that.y2(d.ml)
@@ -715,7 +715,7 @@ Chart.prototype = {
   drawHeartRate: function (data, type) {
     const that = this
     let heartData = []
-    let tempData = data.filter(function (d, i) {
+    let tempData = data.filter(function (d) {
       return d.xl
     })
     tempData.forEach(function (d, i) {
@@ -747,7 +747,7 @@ Chart.prototype = {
     })
 
     if (heartData) {
-      var heartLine = d3.line().defined(function (d, i) {
+      var heartLine = d3.line().defined(function (d) {
         return d[1] !== null
       })
       that.chart
@@ -772,7 +772,7 @@ Chart.prototype = {
       .filter(function (d) {
         return d.yw || d.kw || d.gw
       })
-      .filter(function (d, i) {
+      .filter(function (d) {
         return d.jw || d.sw
       })
       .append('circle')
@@ -803,7 +803,7 @@ Chart.prototype = {
           return y2
         }
       })
-      .attr('r', function (d) {
+      .attr('r', function () {
         return that.style.circleR
       })
   },
@@ -856,7 +856,7 @@ Chart.prototype = {
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .attr('font-size', '10')
-      .text(function (d, i) {
+      .text(function (d) {
         return d
       })
   },
@@ -939,7 +939,7 @@ Chart.prototype = {
       .axisBottom(this.x)
       .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 4))
       .tickSize(this.rowHeight * 2)
-      .tickFormat(function (d, i) {
+      .tickFormat(function () {
         return
       })
     this.svg
@@ -1012,7 +1012,7 @@ Chart.prototype = {
         }
         return 'translate(-10,' + move + ')'
       })
-      .text(function (d, i) {
+      .text(function (d) {
         return d
       })
   },
@@ -1054,7 +1054,7 @@ Chart.prototype = {
       .select('line')
       .attr('class', 'yAxisLine')
       .attr('stroke', this.style.lineColor)
-      .filter(function (d, i) {
+      .filter(function (d) {
         return Math.floor(d) === d
       })
       .attr('stroke-width', 2)
@@ -1115,7 +1115,7 @@ Chart.prototype = {
       .axisBottom(this.x)
       .tickValues(d3.timeHour.range(this.beginTime, this.endTime, 4))
       .tickSize(30)
-      .tickFormat(function (d, i) {
+      .tickFormat(function () {
         return
       })
 
@@ -1129,7 +1129,7 @@ Chart.prototype = {
       .axisLeft(this.painY)
       .tickValues(d3.range(0, 110 / 10, 2))
       .tickSize(-this.width)
-      .tickFormat(function (d, i) {
+      .tickFormat(function () {
         return 
       })
     this.painAxis = this.painChart
@@ -1221,13 +1221,13 @@ Chart.prototype = {
           }
           return 'translate(' + x + ', ' + y + ')'
         })
-        .attr('cx', function (d, i) {
+        .attr('cx', function (d) {
           return that.x(new Date(d.datetime))
         })
-        .attr('cy', function (d, i) {
+        .attr('cy', function (d) {
           return that.painY(d.pain)
         })
-        .attr('r', function (d, i) {
+        .attr('r', function () {
           return that.style.circleR
         })
     // 镇痛
@@ -1237,7 +1237,7 @@ Chart.prototype = {
       .selectAll('circle')
       .data(painData)
       .enter()
-      .filter(function (d, i) {
+      .filter(function (d) {
         return d.pain !== null && d.zt !== null && d.zt >= 0 && d.zt <= 10 && d.zt !== d.pain
       })
       .append('circle')
@@ -1266,7 +1266,7 @@ Chart.prototype = {
           return y2
         }
       })
-      .attr('r', function (d) {
+      .attr('r', function () {
         return that.style.circleR
       })
   },
@@ -1513,7 +1513,7 @@ Chart.prototype = {
       })
       .append('g')
       .attr('class', type)
-      .attr('transform', function (d, i) {
+      .attr('transform', function (d) {
         const x = that.x(new Date(d.datetime))
         const y = that.y2(d.xl)
         return 'translate(' + x + ', ' + y + ')'

@@ -1,4 +1,5 @@
 
+import * as d3 from 'd3'
 import Axillary from './draw_icon/axillary.js'
 import Oral from './draw_icon/oral.js'
 import Anal from './draw_icon/anal.js'
@@ -8,6 +9,30 @@ import Heart from './draw_icon/heart.js'
 import Pain from './draw_icon/pain.js'
 import Analgesia from './draw_icon/analgesia.js'
 import Overlap from './draw_icon/overlap.js'
+export function DrawIconTest(){
+  d3.selectAll('.icon').insert('svg','p')
+   .attr('width',30)
+   .attr('height',20)
+   .append('g')
+   .attr('class','g-icon')
+   .attr('transform','translate(0,0)')
+   let nodes=d3.selectAll('g.g-icon').nodes()
+   let point=new Point()
+   point.draw(d3.select(nodes[0]),'axillary',{x:10,y:10})
+   point.draw(d3.select(nodes[1]),'oral',{x:10,y:10})
+   point.draw(d3.select(nodes[2]),'anal',{x:10,y:10})
+   point.draw(d3.select(nodes[3]),'cooling',{x:10,y:10})
+   point.draw(d3.select(nodes[4]),'pulse',{x:10,y:10})
+   point.draw(d3.select(nodes[5]),'heart',{x:10,y:10})
+   point.draw(d3.select(nodes[6]),'heart',{x:10,y:10,peaceMaker:true})
+   point.draw(d3.select(nodes[7]),'pain',{x:10,y:10})
+   point.draw(d3.select(nodes[8]),'analgesia',{x:10,y:10})
+   point.draw(d3.select(nodes[9]),'overlap',{x:10,y:10,overlapType:'axillaryAndHeart'})
+   point.draw(d3.select(nodes[10]),'overlap',{x:10,y:10,overlapType:'oralAndHeart'})
+   point.draw(d3.select(nodes[11]),'overlap',{x:10,y:10,overlapType:'analAndHeart'})
+   point.draw(d3.select(nodes[12]),'overlap',{x:10,y:10,overlapType:'pulseAndHeart'})
+   point.draw(d3.select(nodes[13]),'overlap',{x:10,y:10,overlapType:'painAndAnalgesia'})
+ }
 export default class Point{//提供点的渲染，处理点交叉的逻辑
   constructor(){
     //对象形式
@@ -31,30 +56,7 @@ export default class Point{//提供点的渲染，处理点交叉的逻辑
     }
   }
 }
-// function DrawIconTest(){
-//   d3.selectAll('.icon').insert('svg','p')
-//    .attr('width',30)
-//    .attr('height',20)
-//    .append('g')
-//    .attr('class','g-icon')
-//    .attr('transform','translate(0,0)')
-//    let nodes=d3.selectAll('g.g-icon').nodes()
-//    let point=new Point()
-//    point.draw(d3.select(nodes[0]),'axillary',{x:10,y:10})
-//    point.draw(d3.select(nodes[1]),'oral',{x:10,y:10})
-//    point.draw(d3.select(nodes[2]),'anal',{x:10,y:10})
-//    point.draw(d3.select(nodes[3]),'cooling',{x:10,y:10})
-//    point.draw(d3.select(nodes[4]),'pulse',{x:10,y:10})
-//    point.draw(d3.select(nodes[5]),'heart',{x:10,y:10})
-//    point.draw(d3.select(nodes[6]),'heart',{x:10,y:10,peaceMaker:true})
-//    point.draw(d3.select(nodes[7]),'pain',{x:10,y:10})
-//    point.draw(d3.select(nodes[8]),'analgesia',{x:10,y:10})
-//    point.draw(d3.select(nodes[9]),'overlap',{x:10,y:10,overlapType:'axillaryAndHeart'})
-//    point.draw(d3.select(nodes[10]),'overlap',{x:10,y:10,overlapType:'oralAndHeart'})
-//    point.draw(d3.select(nodes[11]),'overlap',{x:10,y:10,overlapType:'analAndHeart'})
-//    point.draw(d3.select(nodes[12]),'overlap',{x:10,y:10,overlapType:'pulseAndHeart'})
-//    point.draw(d3.select(nodes[13]),'overlap',{x:10,y:10,overlapType:'painAndAnalgesia'})
-//  }
+
 
 /**
  * AxillaryTemperature 腋温 1

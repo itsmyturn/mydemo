@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import {AxisTickStyle} from './axis_tick_style.js'//坐标轴tick样式接口
 import {axisConfig} from './axisconfig.js'
 import {Axis} from './axis.js'
-import {RenderData} from '../render_data/render_index.js'
+
 
 export class AxisX{
   constructor(){
@@ -35,6 +35,6 @@ export class AxisX{
         return axisTickStyle.getStrokeWidth(item.nameEn,i)
       })
     })
-    new RenderData().renderData()
+    
   }
 }
