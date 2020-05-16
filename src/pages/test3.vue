@@ -1,6 +1,7 @@
 <template>
     <div class="test3">
-        <div class="temperature_wrap">
+        <!-- <button @click="print">打印</button> -->
+        <div class="temperature_wrap" id="printContent">
             <div class="left_title_div"></div>
             <!-- <div class="left_title"></div> -->
             <div class="right_content">
@@ -29,6 +30,17 @@ export default {
         this.$nextTick(()=>{
             new Layout(axisTest)
         })
+    },
+    methods:{
+        print(){
+            var oldhtml = document.body.innerHTML
+            document.body.innerHTML = document.getElementById('printContent').innerHTML
+            document.body.setAttribute('class', 'printBody')
+
+            window.print()
+            document.body.innerHTML = oldhtml
+            window.location.reload()
+        }
     }
 }
 </script>
