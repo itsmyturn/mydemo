@@ -6,7 +6,7 @@ export default class AxillaryTemperature{//腋温
       'stroke':'blue',
       'rotate':0 ,
       'strokeWidth':2,
-      'skewX':-5
+      'skewX':-3
     }
     this.cross=new Cross(this.baseConfig)
   }

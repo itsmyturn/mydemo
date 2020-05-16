@@ -71,7 +71,16 @@ export class Temperature{
           let point=new Point()
           var x = this.axis.getScaleX()(new Date(d.datetime))
           var y = this.axis.getScaleY()(this.getValue(d))
-          point.draw(this.parent,'axillary',{x,y})
+          if(d.yw){
+            point.draw(this.parent,'axillary',{x,y})
+          }
+          if(d.kw){
+            point.draw(this.parent,'oral',{x,y})
+          }
+          if(d.gw){
+            point.draw(this.parent,'anal',{x,y})
+          }
+          
           // var mby = that.y2(d.ml)
           // var xly = that.y2(d.xl)
           // var equal = (y === mby) || (y === xly)
