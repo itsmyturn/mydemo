@@ -6,7 +6,7 @@ export default class Circle{
       strokeWidth:1,
       text:'',
       textColor:'',
-      r:5,
+      r:4,
       dy:0,
       fontSize:'7px'
     }
