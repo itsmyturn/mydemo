@@ -3,7 +3,8 @@ export default class Heart{//口温
   constructor(){
     this.baseConfig={
       'fill':'#fff',
-      'stroke':'red'
+      'stroke':'red',
+      'r':4
     }
     this.circle=new Circle(this.baseConfig)
     

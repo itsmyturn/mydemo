@@ -3,6 +3,9 @@ import {Normal7} from './render_normal7.js'
 import {Breath} from './render_breath.js'
 import {TimeBar} from './render_time_bar.js'
 import {Pain} from './render_pain.js'
+import {Temperature} from './render_temperature.js'
+import {Pulse} from './render_pulse.js'
+import {Heart} from './render_heart.js'
 export class RenderData{
   constructor(){
     // this.renderData()
@@ -18,5 +21,11 @@ export class RenderData{
     new TimeBar().renderData()
     // 疼痛曲线
     new Pain().renderData()
+    //体温
+    new Temperature().renderData()
+    //脉搏
+    new Pulse().renderData()
+    //心率
+    new Heart().renderData()
   }
 }

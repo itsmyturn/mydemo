@@ -46,7 +46,6 @@ export class Pain{
       .attr('d', this.painLine(this.data))
   }
   renderPoint(){
-    console.log('渲染疼痛点')
     let parent=d3.select('.axis_layout_pain')
      // 绘制疼痛数据点
      parent

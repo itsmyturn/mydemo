@@ -1,0 +1,37 @@
+[{
+	"datetime": "2020-04-20 02:00:00",
+	"yw": "35",
+	"kw": null,
+	"gw": null,
+	"sw": "",
+	"jw": "",
+	"xl": "60",
+	"ml": "88",
+	"hx": null,
+	"patientStatus": false,
+	"pacemakerStatus": false
+}, {
+	"datetime": "2020-04-21 02:00:00",
+	"yw": "36",
+	"kw": null,
+	"gw": null,
+	"sw": "",
+	"jw": "",
+	"xl": "100",
+	"ml": "120",
+	"hx": null,
+	"patientStatus": false,
+	"pacemakerStatus": false
+}, {
+	"datetime": "2020-04-22 02:00:00",
+	"yw": "37",
+	"kw": null,
+	"gw": null,
+	"sw": "",
+	"jw": "",
+	"xl": "50",
+	"ml": "90",
+	"hx": null,
+	"patientStatus": false,
+	"pacemakerStatus": false
+}]

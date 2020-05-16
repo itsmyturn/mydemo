@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
-export class Pulse{
+export class Heart{
   constructor(){
     this.data=[]
     axisConfig.forEach(item=>{
@@ -22,7 +22,6 @@ export class Pulse{
       tickValueRange:[12,180,4],
       domainRange:[12, 180],
       valueRange:[500, 0]
-
     })
 
   }
@@ -31,7 +30,7 @@ export class Pulse{
     this.renderPoint()
   }
   getValue(d){
-    return d.ml
+    return d.xl
   }
   renderLine(){
     this.line = d3
@@ -73,7 +72,7 @@ export class Pulse{
           let point=new Point()
           var x = this.axis.getScaleX()(new Date(d.datetime))
           var y = this.axis.getScaleY()(this.getValue(d))
-          point.draw(this.parent,'pulse',{x,y})
+          point.draw(this.parent,'heart',{x,y})
           return 'translate(' + x + ',' + y + ')'
         })
   }

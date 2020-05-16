@@ -3,6 +3,7 @@ import date from "../data/date.json"
 import breathData from "../data/breath.json"
 import data from "../data/normal.json"
 import painData from "../data/pain.json"
+import temperatureData from '../data/temperature.json'
 let rowHeight=20
 const axisConfig=[{
   "nameCn": "日期",
@@ -39,7 +40,8 @@ const axisConfig=[{
   "nameEn": "temperatureAndPulse",
   "top":rowHeight,
   "height":500,
-  "stepX":4
+  "stepX":4,
+  "data":temperatureData
 },{
   "nameCn": "疼痛等级",
   "nameEn": "pain",

@@ -3,7 +3,8 @@ export default class Pulse{//脉搏
   constructor(){
     this.baseConfig={
       'fill':'red',
-      'stroke':'red'
+      'stroke':'red',
+      'r':4
     }
     this.circle=new Circle(this.baseConfig)
     
