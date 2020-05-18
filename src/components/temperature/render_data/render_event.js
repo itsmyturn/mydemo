@@ -11,10 +11,8 @@ export class Event{
         this.data=item[this.command]  
       }
     })
-    
     this.parent=d3.select('.axis_layout_temperatureAndPulse')
     this.axis=new Axis()
-
   }
   renderData(){
     if (!this.data.length) return false
