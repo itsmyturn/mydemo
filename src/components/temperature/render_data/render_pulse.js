@@ -80,6 +80,9 @@ export class Pulse{
       if(!equal){
         point.draw(this.parent,'pulse',{x,y})
       }
+      if(d.ml>180||d.xl>180){
+        point.draw(this.parent,'arrow',{x:x+10,y:y+2})
+      }
     })
   }
 }

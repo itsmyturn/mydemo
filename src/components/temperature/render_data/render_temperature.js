@@ -100,6 +100,9 @@ export class Temperature{
               point.draw(this.parent,'anal',{x,y})
             }
           }
+          if(d.pacemakerStatus&&equal){
+            point.draw(this.parent,'HIcon',{x:x,y:y-10})
+          }
           // var mby = that.y2(d.ml)
           // var xly = that.y2(d.xl)
           // var equal = (y === mby) || (y === xly)

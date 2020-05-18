@@ -9,6 +9,8 @@ import Heart from './draw_icon/heart.js'
 import Pain from './draw_icon/pain.js'
 import Analgesia from './draw_icon/analgesia.js'
 import Overlap from './draw_icon/overlap.js'
+import Arrow from './draw_icon/arrow.js'
+import HIcon from './draw_icon/h.js'
 export function DrawIconTest(){
   d3.selectAll('.icon').insert('svg','p')
    .attr('width',30)
@@ -32,6 +34,8 @@ export function DrawIconTest(){
    point.draw(d3.select(nodes[11]),'overlap',{x:10,y:10,overlapType:'analAndHeart'})
    point.draw(d3.select(nodes[12]),'overlap',{x:10,y:10,overlapType:'pulseAndHeart'})
    point.draw(d3.select(nodes[13]),'overlap',{x:10,y:10,overlapType:'painAndAnalgesia'})
+   point.draw(d3.select(nodes[14]),'arrow',{x:10,y:10})
+   point.draw(d3.select(nodes[15]),'HIcon',{x:10,y:10})
  }
 export default class Point{//提供点的渲染，处理点交叉的逻辑
   constructor(){
@@ -45,7 +49,9 @@ export default class Point{//提供点的渲染，处理点交叉的逻辑
       heart:new Heart(),
       analgesia:new Analgesia(),
       pain:new Pain(),
-      overlap:new Overlap()
+      overlap:new Overlap(),
+      arrow:new Arrow(),
+      HIcon:new HIcon()
     }
   }
   draw(root,name,config={}){
