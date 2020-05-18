@@ -69,29 +69,17 @@ export class Pulse{
       .attr('d', this.line)
   }
   renderPoint(){
-    this.parent
-        .append('g')
-        .attr('class','pulse_circles_wrap CirclesWrap')
-        .selectAll('g')
-        .data(()=>{
-          return this.data.filter((d)=>{
-            const val = this.getValue(d)
-            return val
-          })
-        })
-        .enter()
-        .append('g')
-        .attr('transform', (d)=> {
-          let point=new Point()
-          let  x = this.axis.getScaleX()(new Date(d.datetime))
-          let  y = this.axis.getScaleY()(this.getValue(d))
-          let temperatureY=this.temperatureAxis.getScaleY()(d.yw||d.kw||d.gw)
-          let equal=toFixed(y)===toFixed(temperatureY)
-          if(!equal){
-            point.draw(this.parent,'pulse',{x,y})
-          }
-          
-          return 'translate(' + x + ',' + y + ')'
-        })
+    this.data.filter(item=>{
+      return item.ml
+    }).forEach(d=>{
+      let point=new Point()
+      let  x = this.axis.getScaleX()(new Date(d.datetime))
+      let  y = this.axis.getScaleY()(this.getValue(d))
+      let temperatureY=this.temperatureAxis.getScaleY()(d.yw||d.kw||d.gw||null)
+      let equal=toFixed(y)===toFixed(temperatureY)
+      if(!equal){
+        point.draw(this.parent,'pulse',{x,y})
+      }
+    })
   }
 }

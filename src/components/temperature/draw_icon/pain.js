@@ -6,7 +6,7 @@ export default class Pain{//疼痛
       'stroke':'red',
       'rotate':45,
       'strokeWidth':2,
-      'skewX':2,
+      'skewX':1,
       'skewY':-3
     }
     this.cross=new Cross(this.baseConfig)

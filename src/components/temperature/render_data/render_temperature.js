@@ -69,20 +69,11 @@ export class Temperature{
       .attr('d', this.line)
   }
   renderPoint(){
-    this.parent
-        .append('g')
-        .attr('class','temperature_circles_wrap CirclesWrap')
-        .selectAll('g')
-        .data(()=>{
-          return this.data.filter((d)=>{
-            const val = this.getValue(d)
-            return val && val >= 35 && val <= 42
-          })
-        })
-        .enter()
-        .append('g')
-        .attr('transform', (d)=> {
-          let point=new Point()
+    this.data.filter(item=>{
+      const val = this.getValue(item)
+      return val && val >= 35 && val <= 42
+    }).forEach(d=>{
+      let point=new Point()
           var x = this.axis.getScaleX()(new Date(d.datetime))
           var y = this.axis.getScaleY()(this.getValue(d))
           let mby=this.pulseAxis.getScaleY()(d.ml)
@@ -108,9 +99,7 @@ export class Temperature{
             }else{
               point.draw(this.parent,'anal',{x,y})
             }
-            
           }
-          
           // var mby = that.y2(d.ml)
           // var xly = that.y2(d.xl)
           // var equal = (y === mby) || (y === xly)
@@ -148,8 +137,6 @@ export class Temperature{
           //   }
           // }
           // }
-
-          return 'translate(' + x + ',' + y + ')'
-        })
+    })
   }
 }

@@ -623,7 +623,7 @@ Chart.prototype = {
     if (type === 'temperature') { // 体温
       this.chart
         .append('g')
-        .attr('class', type + 'CirclesWrap CirclesWrap')
+        .attr('class', type + 'circles_wrap circles_wrap')
         .selectAll('g')
         .data(data)
         .enter()
@@ -678,7 +678,7 @@ Chart.prototype = {
     } else if (type === 'pulseRate') { // 脉搏
       this.chart
         .append('g')
-        .attr('class', type + 'CirclesWrap CirclesWrap')
+        .attr('class', type + 'circles_wrap circles_wrap')
         .selectAll('g')
         .data(data)
         .enter()
@@ -1201,7 +1201,7 @@ Chart.prototype = {
     // 绘制疼痛数据点
     this.painAxis
         .append('g')
-        .attr('class', 'CirclesWrap')
+        .attr('class', 'circles_wrap')
         .selectAll('g')
         .data(painData)
         .enter()
@@ -1276,7 +1276,7 @@ Chart.prototype = {
       return false
     }
     var line = parent
-      .insert('g', 'g.CirclesWrap')
+      .insert('g', 'g.circles_wrap')
       .attr('class', 'line')
       .append('line')
       .attr('x1', x1)
@@ -1299,7 +1299,7 @@ Chart.prototype = {
   drawEmptyCircle: function (x, y) {
     this.chart
       .append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
       .append('circle')
       .attr('stroke', 'blue')
@@ -1312,7 +1312,7 @@ Chart.prototype = {
   drawCircle: function (x, y) {
     this.chart
       .append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
       .append('circle')
       .attr('stroke', 'blue')
@@ -1340,7 +1340,7 @@ Chart.prototype = {
     }
     let wrap = parent
     .append('g')
-    .attr('class', 'CirclesWrap')
+    .attr('class', 'circles_wrap')
     .attr('transform', 'translate(' + x + ',' + y + ')')
     if (type === 'painAndZt' || (type === 'pacemaker') && overlap) {
       wrap
@@ -1369,7 +1369,7 @@ Chart.prototype = {
   drawPulse: function (x, y, type) {//脉搏  (如果有类型相同的点可以新建函数直接返回该函数)
     this.chart
       .append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
       .append('circle')
       .attr('stroke', this.lineColor[type])
@@ -1452,7 +1452,7 @@ Chart.prototype = {
   drawgm: function (x, y) {
     var gm = this.chart
       .append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
 
     gm
@@ -1477,7 +1477,7 @@ Chart.prototype = {
   drawkm: function (x, y) {
     this.chart
       .append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
       .html(`
         <circle stroke="red" fill="#FFF" r="${this.style.circleR + 1}" cx="0" cy="0" stroke-width="${this.style.circleWidth}"></circle>
@@ -1488,7 +1488,7 @@ Chart.prototype = {
   drawym: function (x, y) {
     var ym = this.chart
       .append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
 
     ym

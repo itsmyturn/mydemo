@@ -68,34 +68,22 @@ export class Heart{
       .attr('d', this.line)
   }
   renderPoint(){
-    this.parent
-        .append('g')
-        .attr('class','pulse_circles_wrap CirclesWrap')
-        .selectAll('g')
-        .data(()=>{
-          return this.data.filter((d)=>{
-            const val = this.getValue(d)
-            return val
-          })
-        })
-        .enter()
-        .append('g')
-        .attr('transform', (d)=> {
-          let point=new Point()
+    this.data.filter(item=>{
+      return item.ml &&item.xl
+    }).forEach(d=>{
+      let point=new Point()
           var x = this.axis.getScaleX()(new Date(d.datetime))
           var y = this.axis.getScaleY()(this.getValue(d))
-          let temperatureY=this.temperatureAxis.getScaleY()(d.yw||d.kw||d.gw)
+          let temperatureY=this.temperatureAxis.getScaleY()(d.yw||d.kw||d.gw||null)
           let equal=toFixed(y)===toFixed(temperatureY)
           if(!equal){
             if(d.ml===d.xl){
               point.draw(this.parent,'overlap',{x,y,overlapType:'pulseAndHeart'})
             }else{
               point.draw(this.parent,'heart',{x,y})
-            }
-            
+            }  
           }
-          
-          return 'translate(' + x + ',' + y + ')'
-        })
+    })
+    
   }
 }

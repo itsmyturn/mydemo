@@ -21,7 +21,7 @@ export default class Circle{
     let y=config.y
 
     let wrap=root.append('g')
-      .attr('class', 'CirclesWrap')
+      .attr('class', 'circles_wrap')
       .attr('transform', 'translate(' + x + ',' + y + ')')
     wrap.append('circle')
       .attr('stroke', this.config.stroke)

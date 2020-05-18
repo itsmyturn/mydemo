@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
+import {ConnectLine} from './connect_line.js'
 export class Zt{
   constructor(){
     this.data=[]
@@ -24,36 +25,22 @@ export class Zt{
   renderPoint(){
     let parent=d3.select('.axis_layout_pain')
      // 绘制镇痛数据点
-     parent
-     .append('g')
-     .attr('class', 'CirclesWrap')
-     .selectAll('g')
-     .data(this.data)
-     .enter()
-     .filter(function (d) {
-       return d.pain !== null && d.pain >= 0 && d.zt
-     })
-     .append('g')
-     .attr('transform', (d)=> {
-       let point=new Point()
-       let x = this.axis.getScaleX()(new Date(d.datetime))
-       let y = this.axis.getScaleY()(d.zt)
-       
-       if (d.pain === d.zt) {
-        // point.draw(parent,'overlap',{x,y,overlapType:'painAndAnalgesia'})
-       } else {
+     this.data.forEach(d=>{
+      let point=new Point()
+       let x = this.axis.getScaleX()(new Date(d.datetime)) || null
+       let y = this.axis.getScaleY()(d.zt) || null
+       let startY=this.axis.getScaleY()(d.pain) || null
+       if (d.zt&&d.pain !== d.zt) {
         point.draw(parent,'analgesia',{x,y})
+        new ConnectLine({
+          startX:x,
+          startY:startY,
+          endX:x,
+          endY:y,
+          lineType:'dashed',
+          parent
+        })
        }
-       return 'translate(' + x + ', ' + y + ')'
-     })
-     .attr('cx', (d)=> {
-       return this.axis.getScaleX(new Date(d.datetime))
-     })
-     .attr('cy', (d)=> {
-       return this.axis.getScaleY(d.zt)
-     })
-     .attr('r', function () {
-       return 5
      })
   }
 }

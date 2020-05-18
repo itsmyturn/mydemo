@@ -48,18 +48,8 @@ export class Pain{
   renderPoint(){
     let parent=d3.select('.axis_layout_pain')
      // 绘制疼痛数据点
-     parent
-     .append('g')
-     .attr('class', 'CirclesWrap')
-     .selectAll('g')
-     .data(this.data)
-     .enter()
-     .filter(function (d) {
-       return d.pain !== null && d.pain >= 0
-     })
-     .append('g')
-     .attr('transform', (d)=> {
-       let point=new Point()
+     this.data.forEach(d=>{
+      let point=new Point()
        let x = this.axis.getScaleX()(new Date(d.datetime))
        let y = this.axis.getScaleY()(d.pain)
        
@@ -68,16 +58,6 @@ export class Pain{
        } else {
         point.draw(parent,'pain',{x,y})
        }
-       return 'translate(' + x + ', ' + y + ')'
-     })
-     .attr('cx', (d)=> {
-       return this.axis.getScaleX(new Date(d.datetime))
-     })
-     .attr('cy', (d)=> {
-       return this.axis.getScaleY(d.pain)
-     })
-     .attr('r', function () {
-       return 5
      })
   }
 }

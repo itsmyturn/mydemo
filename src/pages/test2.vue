@@ -96,7 +96,7 @@ export default { // authority权限控制，1只读，2可打印
 .printBody .printShowLogo {
   display: block;
 }
-.CirclesWrap text{
+.circles_wrap text{
   font:6px;
 }
 </style>
