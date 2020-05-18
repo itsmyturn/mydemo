@@ -13,7 +13,7 @@ export default class HIcon{
       .attr('stroke', 'red')
       .attr('fill', 'red')
       .attr('stroke-width', 1)
-      .attr('font-size', '10px')
+      .attr('font-size', '8px')
       .attr('dy', 1)
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')

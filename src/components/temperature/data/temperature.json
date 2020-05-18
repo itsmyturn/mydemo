@@ -1,14 +1,14 @@
 [{
 	"datetime": "2020-04-20 02:00:00",
-	"yw": "35",
+	"yw": null,
 	"kw": null,
 	"gw": null,
 	"sw": "",
 	"jw": "",
-	"xl": "60",
-	"ml": "88",
+	"xl": null,
+	"ml": null,
 	"hx": null,
-	"patientStatus": false,
+	"patientStatus": true,
 	"pacemakerStatus": false
 }, {
 	"datetime": "2020-04-21 02:00:00",
@@ -50,13 +50,13 @@
 	"datetime": "2020-04-24 02:00:00",
 	"yw": null,
 	"kw": null,
-	"gw": "35",
+	"gw": null,
 	"sw": "",
 	"jw": "",
-	"xl": "50",
-	"ml": "90",
+	"xl": null,
+	"ml": null,
 	"hx": null,
-	"patientStatus": false,
+	"patientStatus": true,
 	"pacemakerStatus": false
 },{
 	"datetime": "2020-04-25 02:00:00",
@@ -117,7 +117,7 @@
 	"ml": null,
 	"hx": null,
 	"patientStatus": false,
-	"pacemakerStatus": false
+	"pacemakerStatus": true
 },{
 	"datetime": "2020-04-26 18:00:00",
 	"yw": null,
@@ -129,7 +129,7 @@
 	"ml": null,
 	"hx": null,
 	"patientStatus": false,
-	"pacemakerStatus": false
+	"pacemakerStatus": true
 },{
 	"datetime": "2020-04-26 22:00:00",
 	"yw": null,

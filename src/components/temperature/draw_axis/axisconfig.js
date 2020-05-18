@@ -43,14 +43,14 @@ const axisConfig=[{
   "stepX":4,
   "data":temperatureData,
   "statusUp":[{
-    "datetime": "2020-04-20 04:01:00",
+    "datetime": "2020-04-20 05:01:00",
     "value":"手术"
   },{
     "datetime": "2020-04-24 02:01:00",
     "value":"分娩"
   }],
   "statusDown":[{
-    "datetime": "2020-04-20 04:01:00",
+    "datetime": "2020-04-20 02:01:00",
     "value":"外出"
   },{
     "datetime": "2020-04-24 02:01:00",

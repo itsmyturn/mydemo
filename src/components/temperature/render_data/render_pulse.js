@@ -8,7 +8,9 @@ export class Pulse{
     this.data=[]
     axisConfig.forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
-        this.data=item.data
+        this.data=item.data.filter(item=>{
+          return item.ml|| item.patientStatus
+        })
       }
     })
     this.parent=d3.select('.axis_layout_temperatureAndPulse')
@@ -69,9 +71,7 @@ export class Pulse{
       .attr('d', this.line)
   }
   renderPoint(){
-    this.data.filter(item=>{
-      return item.ml
-    }).forEach(d=>{
+    this.data.forEach(d=>{
       let point=new Point()
       let  x = this.axis.getScaleX()(new Date(d.datetime))
       let  y = this.axis.getScaleY()(this.getValue(d))
