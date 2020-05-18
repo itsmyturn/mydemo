@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import {Axis} from '../draw_axis/axis.js'
-import {modHour,formatTime} from '../../../pages/util.js'
+import {modHour,formatTime} from '../util.js'
 export class Normal7{
   constructor(){
 

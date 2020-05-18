@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
-import {toFixed} from '../../../pages/util.js'
+import {toFixed} from '../util.js'
 export class Temperature{
   constructor(){
     this.data=[]
@@ -103,43 +103,6 @@ export class Temperature{
           if(d.pacemakerStatus&&equal){
             point.draw(this.parent,'HIcon',{x:x,y:y-10})
           }
-          // var mby = that.y2(d.ml)
-          // var xly = that.y2(d.xl)
-          // var equal = (y === mby) || (y === xly)
-          // 使用了心率起搏器并且体温===心率 //不走下面的逻辑
-          // if (d.pacemakerStatus && y === xly) {
-          //   that.drawIcon(x, y - 15, 'pacemaker')
-          // }
-          // if (d.pacemakerStatus && y === xly) {
-          // } else {
-             // 腋温与脉搏重合
-          // if (d.yw) {
-          //   if (equal) {
-          //     // that.drawIcon(x, y - 15, 'pacemaker')
-          //     that.drawym(x, y)
-          //   } else {
-          //     that.drawCross(x, y)
-          //   }
-          // }
-            // 口温与脉搏重合
-          // if (d.kw) {
-          //   if (equal) {
-          //     // that.drawIcon(x, y - 15, 'pacemaker')
-          //     that.drawkm(x, y)
-          //   } else {
-          //     that.drawCircle(x, y)
-          //   }
-          // }
-            // 肛温与脉搏重合
-          // if (d.gw) {
-          //   if (equal) {
-          //     // that.drawIcon(x, y - 15, 'pacemaker')
-          //     that.drawgm(x, y)
-          //   } else {
-          //     that.drawEmptyCircle(x, y)
-          //   }
-          // }
-          // }
     })
   }
 }

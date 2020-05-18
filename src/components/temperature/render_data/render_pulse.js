@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
-import {toFixed} from '../../../pages/util.js'
+import {toFixed} from '../util.js'
 export class Pulse{
   constructor(){
     this.data=[]

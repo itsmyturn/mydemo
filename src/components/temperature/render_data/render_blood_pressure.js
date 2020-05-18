@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
-import {filterTime} from '../../../pages/util.js'
+import {filterTime} from '../util.js'
 export class BloodPressure{
   constructor(){
     this.data=[]
