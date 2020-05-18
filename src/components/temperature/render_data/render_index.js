@@ -8,6 +8,7 @@ import {Temperature} from './render_temperature.js'
 import {Cooling} from './render_cooling.js'
 import {Pulse} from './render_pulse.js'
 import {Heart} from './render_heart.js'
+import {Event} from './render_event.js'
 export class RenderData{
   constructor(){
     // this.renderData()
@@ -31,5 +32,8 @@ export class RenderData{
     //体温
     new Temperature().renderData()
     new Cooling().renderData()
+    //事件
+    new Event('statusUp').renderData()
+    new Event('statusDown').renderData()
   }
 }

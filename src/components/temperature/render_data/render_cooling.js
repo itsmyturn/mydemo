@@ -42,7 +42,6 @@ export class Cooling{
        let startY=this.axis.getScaleY()(this.getValue(d)) || null
        
        if (this.getValue(d)&&(this.getValue(d)!=d.jw ||this.getValue(d)!=d.sw)) {
-        console.log(startY,y)
         new ConnectLine({
           startX:x,
           startY:startY,
@@ -56,3 +55,13 @@ export class Cooling{
      })
   }
 }
+
+/**
+ * 使用心率起搏器的情况
+ * 1，超过180，需要在原点右侧标注上箭头
+ *  心率和脉搏重叠 
+ * 心率和脉搏不重叠，心率大于脉搏或者心率小于脉搏
+ * 2，没有超过180
+ * 心率和脉搏重叠，
+ * 心率和体温重叠
+*/
