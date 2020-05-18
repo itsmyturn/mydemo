@@ -28,8 +28,12 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
       skewX:-2,
       skewY:-2
     })
-    cross.draw(root,config)
+    circle.setBaseConfig({
+      fill:'#fff'
+    })
+    
     circle.draw(root,config)
+    cross.draw(root,config)
   }
   oralAndHeart(root,config){//蓝点红圈
     let circle=new Circle()
@@ -37,7 +41,8 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
       text:'·',
       textColor:'blue',
       fontSize:'14px',
-      dy:1
+      dy:1,
+      fill:'#fff'
     })
     circle.draw(root,config)
 
@@ -49,7 +54,8 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
       textColor:'red',
       stroke:'blue',
       fontSize:'14px',
-      dy:1
+      dy:1,
+      fill:'#fff'
     })
     circle.draw(root,config)
   }
@@ -57,6 +63,7 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
     this.circle.setBaseConfig({
       stroke:'red',
       text:'·',
+      fill:'#fff',
       textColor:'red',
       fontSize:'14px'
     })
@@ -70,8 +77,11 @@ export default class Overlap{//腋温，口温,肛温分别与脉搏重叠
       stroke:'red',
       skewY:-4
     })
-    
-    cross.draw(root,config)
+    circle.setBaseConfig({
+      fill:'#fff'
+    })
     circle.draw(root,config)
+    cross.draw(root,config)
+    
   }
 }

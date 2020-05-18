@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
+import {toFixed} from '../../../pages/util.js'
 export class Pulse{
   constructor(){
     this.data=[]
@@ -23,6 +24,17 @@ export class Pulse{
       domainRange:[12, 180],
       valueRange:[500, 0]
 
+    })
+    this.temperatureAxis=new Axis()
+    this.temperatureAxis.setAxisConfig({
+      tickFormatCallback:function (d){
+        if (Math.floor(d) === d) {
+            return d
+        }
+      },
+      tickValueRange:[33.6,42,0.2],
+      domainRange:[33.6, 42],
+      valueRange:[500, 0]
     })
 
   }
@@ -71,9 +83,14 @@ export class Pulse{
         .append('g')
         .attr('transform', (d)=> {
           let point=new Point()
-          var x = this.axis.getScaleX()(new Date(d.datetime))
-          var y = this.axis.getScaleY()(this.getValue(d))
-          point.draw(this.parent,'pulse',{x,y})
+          let  x = this.axis.getScaleX()(new Date(d.datetime))
+          let  y = this.axis.getScaleY()(this.getValue(d))
+          let temperatureY=this.temperatureAxis.getScaleY()(d.yw||d.kw||d.gw)
+          let equal=toFixed(y)===toFixed(temperatureY)
+          if(!equal){
+            point.draw(this.parent,'pulse',{x,y})
+          }
+          
           return 'translate(' + x + ',' + y + ')'
         })
   }

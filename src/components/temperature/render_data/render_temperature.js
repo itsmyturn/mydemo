@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
+import {toFixed} from '../../../pages/util.js'
 export class Temperature{
   constructor(){
     this.data=[]
@@ -21,6 +22,19 @@ export class Temperature{
       tickValueRange:[33.6,42,0.2],
       domainRange:[33.6, 42],
       valueRange:[500, 0]
+    })
+    this.pulseAxis=new Axis()
+    this.pulseAxis.setAxisConfig({
+      tickSizeY:0,
+      tickFormatCallback:function (d){
+        if (d % 20 === 0) {
+          return d
+        }
+      },
+      tickValueRange:[12,180,4],
+      domainRange:[12, 180],
+      valueRange:[500, 0]
+
     })
 
   }
@@ -71,14 +85,30 @@ export class Temperature{
           let point=new Point()
           var x = this.axis.getScaleX()(new Date(d.datetime))
           var y = this.axis.getScaleY()(this.getValue(d))
+          let mby=this.pulseAxis.getScaleY()(d.ml)
+          let xly=this.pulseAxis.getScaleY()(d.xl)
+          let equal = (toFixed(y) === toFixed(mby)) || (toFixed(y) === toFixed(xly))
           if(d.yw){
-            point.draw(this.parent,'axillary',{x,y})
+            if(equal){
+              point.draw(this.parent,'overlap',{x,y,overlapType:'axillaryAndHeart'})
+            }else{
+              point.draw(this.parent,'axillary',{x,y})
+            }
           }
           if(d.kw){
-            point.draw(this.parent,'oral',{x,y})
+            if(equal){
+              point.draw(this.parent,'overlap',{x,y,overlapType:'oralAndHeart'})
+            }else{
+              point.draw(this.parent,'oral',{x,y})
+            }
           }
           if(d.gw){
-            point.draw(this.parent,'anal',{x,y})
+            if(equal){
+              point.draw(this.parent,'overlap',{x,y,overlapType:'analAndHeart'})
+            }else{
+              point.draw(this.parent,'anal',{x,y})
+            }
+            
           }
           
           // var mby = that.y2(d.ml)

@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
+import {toFixed} from '../../../pages/util.js'
 export class Heart{
   constructor(){
     this.data=[]
@@ -21,6 +22,17 @@ export class Heart{
       },
       tickValueRange:[12,180,4],
       domainRange:[12, 180],
+      valueRange:[500, 0]
+    })
+    this.temperatureAxis=new Axis()
+    this.temperatureAxis.setAxisConfig({
+      tickFormatCallback:function (d){
+        if (Math.floor(d) === d) {
+            return d
+        }
+      },
+      tickValueRange:[33.6,42,0.2],
+      domainRange:[33.6, 42],
       valueRange:[500, 0]
     })
 
@@ -72,7 +84,17 @@ export class Heart{
           let point=new Point()
           var x = this.axis.getScaleX()(new Date(d.datetime))
           var y = this.axis.getScaleY()(this.getValue(d))
-          point.draw(this.parent,'heart',{x,y})
+          let temperatureY=this.temperatureAxis.getScaleY()(d.yw||d.kw||d.gw)
+          let equal=toFixed(y)===toFixed(temperatureY)
+          if(!equal){
+            if(d.ml===d.xl){
+              point.draw(this.parent,'overlap',{x,y,overlapType:'pulseAndHeart'})
+            }else{
+              point.draw(this.parent,'heart',{x,y})
+            }
+            
+          }
+          
           return 'translate(' + x + ',' + y + ')'
         })
   }

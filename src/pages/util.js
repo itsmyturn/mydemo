@@ -44,7 +44,7 @@ function filterTime (type, data) { // 过滤 上午am 下午pm
     }
     return true
   }
-  times = arr.filter(function (d, i) {
+  times = arr.filter(function (d) {
     var hour = new Date(d.datetime).getHours()
     if (type === 'am') {
       return hour < 12 && isNotNull(d.value)
@@ -81,11 +81,15 @@ function formatTime (beginTime, time) {
     return curY + '-' + toDou(curM) + '-' + toDou(curD)
   }
 }
+function toFixed(num){
+  return num.toFixed(4)
+}
 
 export {
   getEndTime,
   getConvertValue,
   filterTime,
   modHour,
-  formatTime
+  formatTime,
+  toFixed
 }

@@ -33,7 +33,7 @@ const axisConfig=[{
   "top":rowHeight,
   "height":rowHeight,
   "stepX":4,
-  "timeBarType":"start2of12"
+  "timeBarType":"start2of24"
 },
 {
   "nameCn": "体温脉搏",
