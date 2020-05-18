@@ -80,7 +80,13 @@ export class Heart{
             if(d.ml===d.xl){
               point.draw(this.parent,'overlap',{x,y,overlapType:'pulseAndHeart'})
             }else{
-              point.draw(this.parent,'heart',{x,y})
+              if(d.ml>180&&d.xl>180)return 
+              if(d.pacemakerStatus){
+                point.draw(this.parent,'heart',{x,y,peaceMaker:true})
+              }else{
+                point.draw(this.parent,'heart',{x,y})
+              }
+              
             }  
           }
     })

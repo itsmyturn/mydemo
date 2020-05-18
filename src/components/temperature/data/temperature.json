@@ -17,8 +17,8 @@
 	"gw": null,
 	"sw": "",
 	"jw": 35,
-	"xl": "100",
-	"ml": "120",
+	"xl": "190",
+	"ml": "191",
 	"hx": null,
 	"patientStatus": false,
 	"pacemakerStatus": false
@@ -33,7 +33,7 @@
 	"ml": "90",
 	"hx": null,
 	"patientStatus": false,
-	"pacemakerStatus": false
+	"pacemakerStatus": true
 },{
 	"datetime": "2020-04-23 02:00:00",
 	"yw": null,
