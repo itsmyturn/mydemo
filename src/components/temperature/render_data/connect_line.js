@@ -14,12 +14,13 @@ export class ConnectLine{
     this.renderData()
   }
   renderData(){
+    let skewY=this.startY<this.endY? 3:-3
     let  line = this.parent
       .insert('g','g.circle_wrap')
       .attr('class', 'connect_line')
       .append('line')
       .attr('x1', this.startX)
-      .attr('y1', this.startY)
+      .attr('y1', this.startY+skewY)
       .attr('x2', this.endX)
       .attr('y2', this.endY)
       .attr('fill', 'none')

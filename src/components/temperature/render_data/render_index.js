@@ -5,6 +5,7 @@ import {TimeBar} from './render_time_bar.js'
 import {Pain} from './render_pain.js'
 import {Zt} from './render_zt.js'
 import {Temperature} from './render_temperature.js'
+import {Cooling} from './render_cooling.js'
 import {Pulse} from './render_pulse.js'
 import {Heart} from './render_heart.js'
 export class RenderData{
@@ -29,5 +30,6 @@ export class RenderData{
     new Heart().renderData()
     //体温
     new Temperature().renderData()
+    new Cooling().renderData()
   }
 }

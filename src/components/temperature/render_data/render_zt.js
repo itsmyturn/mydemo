@@ -31,7 +31,6 @@ export class Zt{
        let y = this.axis.getScaleY()(d.zt) || null
        let startY=this.axis.getScaleY()(d.pain) || null
        if (d.zt&&d.pain !== d.zt) {
-        point.draw(parent,'analgesia',{x,y})
         new ConnectLine({
           startX:x,
           startY:startY,
@@ -40,6 +39,7 @@ export class Zt{
           lineType:'dashed',
           parent
         })
+        point.draw(parent,'analgesia',{x,y})
        }
      })
   }
