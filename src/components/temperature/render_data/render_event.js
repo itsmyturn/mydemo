@@ -6,9 +6,13 @@ export class Event{
   constructor(command){
     this.data=[]
     this.command=command
+    this.showPain=false
     axisConfig.forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item[this.command]  
+      }
+      if(item.nameEn==='pain'){
+        this.showPain=item.show
       }
     })
     this.parent=d3.select('.axis_layout_temperatureAndPulse')
@@ -30,8 +34,13 @@ export class Event{
         let  x = this.axis.getScaleX()(modHour(d))-5
         if (this.command === 'statusUp') {
           return 'translate(' + x + ',10)'
-        } else if (this.command === 'statusDown') {//560 474
-          return 'translate(' + x + ',430)'
+        } else if (this.command === 'statusDown') {
+          if(this.showPain){
+            return 'translate(' + x + ',430)'
+          }else{
+            return 'translate(' + x + ',512)'
+          }
+          
         }
       })
       .selectAll('text')

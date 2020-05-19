@@ -17,6 +17,6 @@ export function axisTest(){
   new Layout()//简单布局
   new RenderAxis().render()//坐标轴
   new RenderData().renderData() //数据
-  // renderpain()
+  renderpain()
   DrawIconTest()//图标测试
 }

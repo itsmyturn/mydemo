@@ -14,7 +14,6 @@ export class AxisX{
     let axisTickStyle=new AxisTickStyle()
     
     let nodes=d3.selectAll('g.axis_layout').nodes()
-    console.log(nodes)
     nodes.map((node,index)=>{
       let item=this.data[index]
       //x轴相关

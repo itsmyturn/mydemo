@@ -53,7 +53,7 @@ export class Pain{
        let x = this.axis.getScaleX()(new Date(d.datetime))
        let y = this.axis.getScaleY()(d.pain)
        
-       if (d.pain === d.zt) {
+       if (d.pain&&d.pain === d.zt) {
         point.draw(parent,'overlap',{x,y,overlapType:'painAndAnalgesia'})
        } else {
         point.draw(parent,'pain',{x,y})

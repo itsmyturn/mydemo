@@ -6,10 +6,12 @@ import {ConnectLine} from './connect_line.js'
 export class Cooling{
   constructor(){
     this.data=[]
-    this.painLine=null
+    this.height=500
+  
     axisConfig.forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item.data
+        this.height=item.height
       }
     })
     this.axis=new Axis()
@@ -21,7 +23,7 @@ export class Cooling{
       },
       tickValueRange:[33.6,42,0.2],
       domainRange:[33.6, 42],
-      valueRange:[500, 0]
+      valueRange:[this.height, 0]
     })
   }
   renderData(){
