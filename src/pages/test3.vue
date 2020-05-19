@@ -19,7 +19,7 @@
 </template>
 <script>
 import {axisTest} from './test.js'
-import {Layout} from '../components/temperature/layout.js'
+
 export default {
     data(){
         return{
@@ -28,7 +28,7 @@ export default {
     },
     mounted(){
         this.$nextTick(()=>{
-            new Layout()
+            
             axisTest()
         })
     },
