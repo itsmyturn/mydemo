@@ -4,6 +4,7 @@ import {AdaptData} from './adaptData.js'
 import {axisConfig} from './draw_axis/axisconfig.js'
 //插入数据结构
 //适配体温单需要的数据
+
 let adaptData=new AdaptData(dataSource)
 export  class Layout{
   constructor(){
@@ -14,8 +15,6 @@ export  class Layout{
     this.colums=null
     this.createWrap()
     this.createRowDiv()
-    // DrawIconTest() //图标测试
-    // ConstructorTest()//利用坐标轴布局 测试
   }
   createWrap(){
     this.titleWrapDiv=d3
@@ -24,7 +23,9 @@ export  class Layout{
   createRowDiv(){
     this.row=this.titleWrapDiv
       .selectAll('div')
-      .data(axisConfig)
+      .data(()=>{
+        return axisConfig.filter(item=>item.show)
+      })
       .enter()
       .append('div')
       .attr('class',(d)=>{

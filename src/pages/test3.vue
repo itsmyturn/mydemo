@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import {axisTest} from './test.js'
+import {axisTest} from '../components/temperature/test.js'
 
 export default {
     data(){

@@ -7,7 +7,7 @@
 <script>
 // import Highcharts from 'highcharts';
 import HighchartsGantt from 'highcharts/highcharts-gantt';
-console.log(HighchartsGantt,'123')
+// console.log(HighchartsGantt,'123')
 
 export default {
   name: 'highcharts',
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     initChart() {
-      console.log(this.$el);
+      // console.log(this.$el);
       this.$el.style.width = 800 + 'px';
       this.$el.style.height = 400+ 'px';
       // THE CHART

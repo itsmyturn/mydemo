@@ -1,11 +1,20 @@
 import * as d3 from 'd3'
 import {Axis} from './axis.js'
+import {axisConfig} from './axisconfig.js'
 export class TemperatureAxisY{
   constructor(){
   }
   render(){
     let axis=new Axis()
     let parent=d3.select('.axis_layout_temperatureAndPulse')
+    this.data=[]
+    this.height=500
+    axisConfig.forEach(item=>{
+      if(item.nameEn==='temperatureAndPulse'){
+        this.data=item.data
+        this.height=item.height
+      }
+    })
     axis.setAxisConfig({
       tickFormatCallback:function (d){
         if (Math.floor(d) === d) {
@@ -14,7 +23,7 @@ export class TemperatureAxisY{
       },
       tickValueRange:[33.6,42,0.2],
       domainRange:[33.6, 42],
-      valueRange:[500, 0]
+      valueRange:[this.height, 0]
     })
     parent
       .append('g')

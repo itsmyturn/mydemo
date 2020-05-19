@@ -4,17 +4,18 @@ import {axisConfig} from './axisconfig.js'
 import {AxisX} from './render_axis_x.js'
 import {PulseAxisY} from './render_axis_y_pulse.js'
 import {TemperatureAxisY} from './render_axis_y_temperature'
-import {PainAxisY}from './render_axis_y_pain'
+// import {PainAxisY}from './render_axis_y_pain'
 export class RenderAxis{
   constructor(){
     this.Axis=Axis
-    this.axisConfig=axisConfig
     this.svg=d3.select('.content_auto').append('svg')
     .attr('width','100%')
     .attr('height','100%')
     let h=0
     this.svg.selectAll('.axis_layout')
-      .data(axisConfig)
+      .data(()=>{
+        return axisConfig.filter(item=>item.show)
+      })
       .enter()
       .append('g')
       .attr('class',function(d){
@@ -35,6 +36,6 @@ export class RenderAxis{
   addAxisY(){
     new PulseAxisY().render()
     new TemperatureAxisY().render()
-    new PainAxisY().render()
+    // new PainAxisY().render()
   }
 }

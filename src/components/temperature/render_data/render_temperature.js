@@ -6,8 +6,10 @@ import {toFixed} from '../util.js'
 export class Temperature{
   constructor(){
     this.data=[]
+    this.height=500
     axisConfig.forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
+        this.height=item.height
         this.data=item.data.filter(item=>{
           const val = this.getValue(item)
           return (val && val >= 35 && val <= 42)|| item.patientStatus
@@ -24,7 +26,7 @@ export class Temperature{
       },
       tickValueRange:[33.6,42,0.2],
       domainRange:[33.6, 42],
-      valueRange:[500, 0]
+      valueRange:[this.height, 0]
     })
     this.pulseAxis=new Axis()
     this.pulseAxis.setAxisConfig({
@@ -36,7 +38,7 @@ export class Temperature{
       },
       tickValueRange:[12,180,4],
       domainRange:[12, 180],
-      valueRange:[500, 0]
+      valueRange:[this.height, 0]
 
     })
 

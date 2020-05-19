@@ -1,7 +1,14 @@
 import * as d3 from 'd3'
 import {Axis} from './axis.js'
+import {axisConfig} from './axisconfig.js'
 export class PainAxisY{
   constructor(){
+    this.height=100
+    axisConfig.forEach(item=>{
+      if(item.nameEn==='pain'){
+        this.height=item.height
+      }
+    })
     this.axis=new Axis()
   }
   render(){
@@ -10,7 +17,7 @@ export class PainAxisY{
     this.axis.setAxisConfig({
       tickValueRange:[0, 110 / 10, 2],
       domainRange:[-1, 11],
-      valueRange:[100, -1]
+      valueRange:[this.height, -1]
     })
     parent
       .append('g')

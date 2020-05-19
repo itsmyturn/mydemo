@@ -2,8 +2,8 @@ import {BloodPressure} from './render_blood_pressure.js'
 import {Normal7} from './render_normal7.js'
 import {Breath} from './render_breath.js'
 import {TimeBar} from './render_time_bar.js'
-import {Pain} from './render_pain.js'
-import {Zt} from './render_zt.js'
+// import {Pain} from './render_pain.js'
+// import {Zt} from './render_zt.js'
 import {Temperature} from './render_temperature.js'
 import {Cooling} from './render_cooling.js'
 import {Pulse} from './render_pulse.js'
@@ -23,8 +23,8 @@ export class RenderData{
     //时间轴
     new TimeBar().renderData()
     // 疼痛曲线
-    new Pain().renderData()
-    new Zt().renderData()
+    // new Pain().renderData()
+    // new Zt().renderData()
     //脉搏
     new Pulse().renderData()
     //心率

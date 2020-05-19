@@ -6,16 +6,20 @@ import {Axis} from './axis.js'
 
 export class AxisX{
   constructor(){
-    
+      this.data=axisConfig.filter(item=>{
+        return item.show
+      })
   }
   render(){//在svg中生成坐标轴
     let axisTickStyle=new AxisTickStyle()
     
     let nodes=d3.selectAll('g.axis_layout').nodes()
-    nodes.forEach((node,index)=>{
+    console.log(nodes)
+    nodes.map((node,index)=>{
+      let item=this.data[index]
       //x轴相关
       let axis=new Axis()
-      let item=axisConfig[index]
+      
       axis.setAxisConfig({
         tickSizeX:item.height,
         stepX:item.stepX

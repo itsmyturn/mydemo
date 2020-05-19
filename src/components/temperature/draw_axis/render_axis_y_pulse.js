@@ -1,7 +1,16 @@
 import * as d3 from 'd3'
 import {Axis} from './axis.js'
+import {axisConfig} from './axisconfig.js'
 export class PulseAxisY{
   constructor(){
+    this.data=[]
+    this.height=500
+    axisConfig.forEach(item=>{
+      if(item.nameEn==='temperatureAndPulse'){
+        this.data=item.data
+        this.height=item.height
+      }
+    })
   }
   render(){
     let axis=new Axis()
@@ -14,7 +23,7 @@ export class PulseAxisY{
       },
       tickValueRange:[12,180,4],
       domainRange:[12, 180],
-      valueRange:[500, 0]
+      valueRange:[this.height, 0]
 
     })
     let tickNumberParent=d3.select('.title_temperatureAndPulse')
