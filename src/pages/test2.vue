@@ -1,5 +1,10 @@
 <template>
-    <div id="chart"></div>
+    <div>
+
+    <button @click="print">打印</button>
+    <div id="printContent"><div id="chart"></div></div>
+    
+    </div>
 </template>
 <script>
 import { dataSource } from './datasource.js'
@@ -36,6 +41,15 @@ export default { // authority权限控制，1只读，2可打印
     this.getChartData()
   },
   methods: {
+    print(){
+        // var oldhtml = document.body.innerHTML
+        document.body.innerHTML = document.getElementById('printContent').innerHTML
+        document.body.setAttribute('class', 'printBody')
+
+        // window.print()
+        // document.body.innerHTML = oldhtml
+        // window.location.reload()
+    },
     getChartData () {
       this.patientInfo = dataSource.patientInfo
       this.options.dataSource = dataSource

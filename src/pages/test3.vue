@@ -1,19 +1,21 @@
 <template>
-    <div class="test3">
-        <!-- <button @click="print">打印</button> -->
-        <div class="temperature_wrap" id="printContent">
-            <div class="left_title_div"></div>
-            <!-- <div class="left_title"></div> -->
-            <div class="right_content">
-                <div class="content_auto">
-                    
+    <div >
+        <div class="print"><button @click="print">打印</button></div>
+        
+        <div id="printContent" class="test3">
+            <div class="temperature_wrap" >
+                <div class="left_title_div"></div>
+                <div class="right_content">
+                    <div class="content_auto">
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="legend">
-            <div class="icon" v-for="item in icons" :key="item">
-                <p>{{item}}</p>
-            </div>
+            <!-- <div class="legend"> -->
+                <!-- <div class="icon" v-for="item in icons" :key="item">
+                    <p>{{item}}</p>
+                </div> -->
+            <!-- </div> -->
         </div>
     </div>
 </template>
@@ -34,56 +36,64 @@ export default {
     },
     methods:{
         print(){
-            var oldhtml = document.body.innerHTML
+            // var oldhtml = document.body.innerHTML
             document.body.innerHTML = document.getElementById('printContent').innerHTML
             document.body.setAttribute('class', 'printBody')
 
-            window.print()
-            document.body.innerHTML = oldhtml
-            window.location.reload()
+            // window.print()
+            // document.body.innerHTML = oldhtml
+            // window.location.reload()
         }
     }
 }
 </script>
 <style scoped>
+.print{
+    height: 30px;
+    line-height: 30px;
+}
 .test3{/*需要考虑a4纸的大小*/
     width: 1000px;
     margin:0 auto;
     display:flex;
     flex-direction: row;
     text-align: left;
-    height:950px;
-    overflow: hidden;
+    /* height:900px; */
+    overflow: auto;
 }
 .temperature_wrap{
     display:flex;
     flex-direction: row;
-    width:700px;
-    height:950px;
+    width: 700px;
+    /* height:900px; */
+    /* width:750px;
+    height:900px; */
+    /* width: 210mm;
+    height:297mm; */
     /* border:1px solid #000; */
     overflow:hidden;
 }
 .left_title_div{
     border:1px solid #000;
     border-right:none;
-    border-bottom:none;
     text-align: left;
+    box-sizing:border-box;
 }
 .left_title,.left_title_div{
     width: 130px;
-    height:900px;
+    /* height:900px; */
 }
 .right_content{
-    flex:1;
-    overflow:auto;/*auto*/
-    /* border:1px solid #0f0; */
+    /* flex:1; */
+    width:570px;
+    /* overflow:auto; */
     
-
 }
 .content_auto{
     width:100%;
-    height:900px;
+    height:100%;
     border-bottom:1px solid #000;
+    box-sizing:border-box;
 }
 .legend{
     width: 200px;
