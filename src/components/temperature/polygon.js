@@ -9,12 +9,12 @@
  */
 export function parseRePoint(mbData,xlData) {
     //绘制点、折线、脉搏短促
-    let pointArray = [];
+    let pointArray = []
+    let mb=mergeArr(mbData)
+    let xl=mergeArr(xlData)
     // 根据心率和脉搏点，绘制多边形（脉搏短促）
     //统计出现的多边形
-    // console.log('脉搏',mbData)
-    // console.log('心率',xlData)
-    let polygonArray = getPolygon(mbData, xlData);
+    let polygonArray = getPolygon(mb, xl)
     //绘制多边形
     for (let i = 0; i < polygonArray.length; i++) {
         let polygon = polygonArray[i];
@@ -212,7 +212,7 @@ function getParseFloat(number, sub) {
  * @param {String/Number} key react数组key值（唯一）
  * @return {JSON} polygonLinear 多边形边的二元一次方程的数组；polygonHtml 多边形显示组件；point多边形的点的数组
  */
-function drawPolygon(points, color,) {
+function drawPolygon(points, color) {
     if (points.length === 0) {
         return "";
     }
@@ -413,11 +413,27 @@ function drawBlueLine(polygonArray) {
             }
             //相邻两点生成一条线段
             for (let i = 0; i < points.length; i = i + 2) {
-                htmlArray.push(<line key={'xiangling' + i} x1={points[i].x} y1={points[i].y} x2={points[i + 1].x}
-                                     y2={points[i + 1].y} style={{stroke: 'blue', strokeWidth: 1}}/>);
+                htmlArray.push(`<line key="xiangling${i}" x1="${points[i].x}" y1="${points[i].y}" x2="${points[i + 1].x}"
+                                     y2="${points[i + 1].y}" stroke="blue" stroke-width="1"/>`);
             }
         }
     }
     htmlArray.push(htmlde);
     return htmlArray;
 }
+export function mergeArr(arr) {
+    let store = []
+    let res = []
+    arr.map(item => {
+      if(!item.patientStatus){
+        store.push(item)
+      } else {
+        res.push(store)
+        store = []
+      }
+    })
+    if(store.length > 0) {
+      res.push(store)
+    }
+    return res
+  }

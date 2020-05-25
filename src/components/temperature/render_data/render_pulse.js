@@ -52,38 +52,30 @@ export class Pulse{
     // [[{x,y,value,point:{}}]]
       let mbData=[]
       let xlData=[]
-      let cur=0
-      mbData[cur]=[]
-      xlData[cur]=[]
+      mbData=[]
+      xlData=[]
       this.data.forEach((item)=>{
-        if(item.ml&&item.xl&&(item.xl>item.ml)){
-          mbData[cur].push({
+          mbData.push({
             point:item,
             value:item.ml,
             x:this.axis.getScaleX()(new Date(item.datetime)),
-            y:this.axis.getScaleY()(item.ml)
+            y:this.axis.getScaleY()(item.ml),
+            patientStatus:item.patientStatus
           })
-          xlData[cur].push({
+          xlData.push({
             point:item,
             value:item.xl,
             x:this.axis.getScaleX()(new Date(item.datetime)),
-            y:this.axis.getScaleY()(item.xl)
+            y:this.axis.getScaleY()(item.xl),
+            patientStatus:item.patientStatus
           })
-        }
-      })
-      console.log(mbData,xlData)
+        })
       let polygonArray=parseRePoint(mbData,xlData)
       d3.select('.axis_layout_temperatureAndPulse').append('g')
       .attr('class','polygon')
       .html(()=>{
-        return polygonArray.join('')
+        return polygonArray
       })
-      return {
-        mbData,
-        xlData
-      }
-      // console.log('脉搏',JSON.stringify(mbData))
-      // console.log('心率',JSON.stringify(xlData))
     
   }
   getValue(d){
