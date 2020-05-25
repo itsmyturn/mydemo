@@ -3,6 +3,7 @@ import {Axis} from '../draw_axis/axis.js'
 import {axisConfig} from '../draw_axis/axisconfig.js'
 import Point from '../point.js'
 import {toFixed} from '../util.js'
+import {parseRePoint} from '../polygon.js'
 export class Pulse{
   constructor(){
     this.data=[]
@@ -45,6 +46,45 @@ export class Pulse{
   renderData(){
     this.renderLine()
     this.renderPoint()
+    this.test()
+  }
+  test(){
+    // [[{x,y,value,point:{}}]]
+      let mbData=[]
+      let xlData=[]
+      let cur=0
+      mbData[cur]=[]
+      xlData[cur]=[]
+      this.data.forEach((item)=>{
+        if(item.ml&&item.xl&&(item.xl>item.ml)){
+          mbData[cur].push({
+            point:item,
+            value:item.ml,
+            x:this.axis.getScaleX()(new Date(item.datetime)),
+            y:this.axis.getScaleY()(item.ml)
+          })
+          xlData[cur].push({
+            point:item,
+            value:item.xl,
+            x:this.axis.getScaleX()(new Date(item.datetime)),
+            y:this.axis.getScaleY()(item.xl)
+          })
+        }
+      })
+      console.log(mbData,xlData)
+      let polygonArray=parseRePoint(mbData,xlData)
+      d3.select('.axis_layout_temperatureAndPulse').append('g')
+      .attr('class','polygon')
+      .html(()=>{
+        return polygonArray.join('')
+      })
+      return {
+        mbData,
+        xlData
+      }
+      // console.log('脉搏',JSON.stringify(mbData))
+      // console.log('心率',JSON.stringify(xlData))
+    
   }
   getValue(d){
     return d.ml
