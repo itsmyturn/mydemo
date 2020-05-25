@@ -36,13 +36,13 @@ export default {
     },
     methods:{
         print(){
-            // var oldhtml = document.body.innerHTML
+            var oldhtml = document.body.innerHTML
             document.body.innerHTML = document.getElementById('printContent').innerHTML
             document.body.setAttribute('class', 'printBody')
 
-            // window.print()
-            // document.body.innerHTML = oldhtml
-            // window.location.reload()
+            window.print()
+            document.body.innerHTML = oldhtml
+            window.location.reload()
         }
     }
 }
@@ -76,6 +76,7 @@ export default {
 .left_title_div{
     border:1px solid #000;
     border-right:none;
+    border-bottom:none;
     text-align: left;
     box-sizing:border-box;
 }
@@ -86,6 +87,7 @@ export default {
 .right_content{
     /* flex:1; */
     width:570px;
+    border-bottom:1px solid #000;
     /* overflow:auto; */
     
 }
