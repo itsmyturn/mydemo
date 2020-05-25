@@ -397,7 +397,7 @@ function drawBlueLine(polygonArray) {
         let points = totalPoints[j];
         if (points.length === 2) {
             htmlArray.push(`<line key="${Math.random()}points" x1="${points[0].x}" y1="${points[0].y}" x2="${points[1].x}" y2="${points[1].y}"
-                             stroke="blue" stroke-width="1"/>`);
+                             stroke="red" stroke-width="1"/>`);
         } else if (points.length > 2 && points.length % 2 === 0) {
             //根据x值大小排序（升序）冒泡排序
             for (let i = 0; i < points.length - 1; i++) { //取数组中任意两点匹配
@@ -414,7 +414,7 @@ function drawBlueLine(polygonArray) {
             //相邻两点生成一条线段
             for (let i = 0; i < points.length; i = i + 2) {
                 htmlArray.push(`<line key="xiangling${i}" x1="${points[i].x}" y1="${points[i].y}" x2="${points[i + 1].x}"
-                                     y2="${points[i + 1].y}" stroke="blue" stroke-width="1"/>`);
+                                     y2="${points[i + 1].y}" stroke="red" stroke-width="1"/>`);
             }
         }
     }

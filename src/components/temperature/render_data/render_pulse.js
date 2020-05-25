@@ -46,14 +46,12 @@ export class Pulse{
   renderData(){
     this.renderLine()
     this.renderPoint()
-    this.test()
+    this.renderPolygon()
   }
-  test(){
+  renderPolygon(){
     // [[{x,y,value,point:{}}]]
       let mbData=[]
       let xlData=[]
-      mbData=[]
-      xlData=[]
       this.data.forEach((item)=>{
           mbData.push({
             point:item,
