@@ -1,5 +1,5 @@
 import {RenderAxis} from './draw_axis/render_axis.js' //坐标轴接口
-// import {DrawIconTest} from './point.js'
+import {DrawIconTest} from './point.js'
 import {RenderData} from './render_data/render_index.js'
 import {Layout} from './layout.js'
 //疼痛相关的 
@@ -27,4 +27,5 @@ export function axisTest(){
   new RenderAxis().render()//坐标轴
   new RenderData().renderData() //数据
   renderpain()
+  new DrawIconTest()
 }

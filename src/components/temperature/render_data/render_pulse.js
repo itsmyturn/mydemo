@@ -46,7 +46,7 @@ export class Pulse{
   renderData(){
     this.renderLine()
     this.renderPoint()
-    this.renderPolygon()
+    // this.renderPolygon()
   }
   renderPolygon(){
     // [[{x,y,value,point:{}}]]

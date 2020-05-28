@@ -11,11 +11,11 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="legend"> -->
-                <!-- <div class="icon" v-for="item in icons" :key="item">
+            <div class="legend">
+                <div class="icon" v-for="item in icons" :key="item">
                     <p>{{item}}</p>
-                </div> -->
-            <!-- </div> -->
+                </div>
+            </div>
         </div>
     </div>
 </template>
