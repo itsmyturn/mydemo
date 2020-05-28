@@ -1,11 +1,11 @@
 import * as d3 from 'd3'
 import {Axis} from './axis.js'
-import {axisConfig} from './axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 export class PulseAxisY{
   constructor(){
     this.data=[]
     this.height=500
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item.data
         this.height=item.height

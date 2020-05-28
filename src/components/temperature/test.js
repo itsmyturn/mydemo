@@ -10,7 +10,8 @@ import {PainAxisY}from './draw_axis/render_axis_y_pain'
 //绘制多边形
 // import * as d3 from 'd3'
 // import {parseRePoint} from './polygon.js'
-
+import {dataSource} from './datasource2.js'
+import {DataSourceSingle} from './datasource_adapter.js'
 
 function renderpain(){
   new PainAxisY().render()
@@ -20,6 +21,8 @@ function renderpain(){
 }
 
 export function axisTest(){
+  //数据适配
+  new DataSourceSingle(dataSource,'取数据')
   new Layout()//简单布局
   new RenderAxis().render()//坐标轴
   new RenderData().renderData() //数据

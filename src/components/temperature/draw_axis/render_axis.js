@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import {Axis} from './axis.js'
-import {axisConfig} from './axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import {AxisX} from './render_axis_x.js'
 import {PulseAxisY} from './render_axis_y_pulse.js'
 import {TemperatureAxisY} from './render_axis_y_temperature'
@@ -12,9 +12,10 @@ export class RenderAxis{
     .attr('width','100%')
     .attr('height','100%')
     let h=0
+    this.data=new DataSourceSingle()
     this.svg.selectAll('.axis_layout')
       .data(()=>{
-        return axisConfig.filter(item=>item.show)
+        return this.data.filter(item=>item.show)
       })
       .enter()
       .append('g')

@@ -1,11 +1,11 @@
 import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import {filterTime} from '../util.js'
 export class BloodPressure{
   constructor(){
     this.data=[]
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='xueYa'){
         this.data=item.data
       }

@@ -1,19 +1,13 @@
-import bloodData from "../data/blood_pressure.json"
-import date from "../data/date.json"
-import breathData from "../data/breath.json"
-import data from "../data/normal.json"
-import painData from "../data/pain.json"
-import temperatureData from '../data/temperature.json'
-let chartType=1
+
 let rowHeight=20
-const axisConfig=[{
+const configData=[{
   "nameCn": "日期",
   "nameEn": "date",
   "top":0,
   "width":570/7,
   "height":rowHeight,
   "stepX":24,
-  "data":date
+  // "data":date
   }, {
   "nameCn": "住院天数",
   "nameEn": "zhuYuanTianshu",
@@ -29,7 +23,7 @@ const axisConfig=[{
   "height":rowHeight,
   "stepX":24
 }, {
-  "nameCn": "时间",
+  "nameCn": "时间轴",
   "nameEn": "time",
   "top":rowHeight,
   "height":rowHeight,
@@ -40,9 +34,8 @@ const axisConfig=[{
   "nameCn": "体温脉搏",
   "nameEn": "temperatureAndPulse",
   "top":rowHeight,
-  "height":chartType===1?600:500,
   "stepX":4,
-  "data":temperatureData,
+  // "data":temperatureData,
   "statusUp":[{
     "datetime": "2020-04-20 05:01:00",
     "value":"手术"
@@ -61,26 +54,23 @@ const axisConfig=[{
 {
   "nameCn": "疼痛等级",
   "nameEn": "pain",
-  "top":chartType===1?0:500,
-  "height":chartType===1?0:100,
   "stepX":4,
-  "data":painData,
+  // "data":painData,
   "show":true
 },
 {
   "nameCn": "呼吸(次/min) ",
   "nameEn": "hx",
-  "top":chartType===1?600:100,
   "height":rowHeight*2,
   "stepX":4,
-  "data":breathData
+  // "data":breathData
 }, {
   "nameCn": "血压(mmHg)",
   "nameEn": "xueYa",
-  "top":chartType===1?rowHeight*2:rowHeight*2,
+  "top":rowHeight*2,
   "height":rowHeight,
   "stepX":12,
-  "data":bloodData
+  // "data":bloodData
 }, {
   "nameCn": "体重(kg)",
   "nameEn": "TI_GE_JIAN_CHATI_ZHONG",
@@ -131,18 +121,10 @@ const axisConfig=[{
   "stepX":24
 }]
 
-axisConfig.forEach((item)=>{
-    item.data=item.data||data
+configData.forEach((item)=>{
+    // item.data=item.data||data
     item.width=570/7
-    if(chartType===1){
-      if(item.nameEn==='pain'){
-        item.show=false
-      }else{
-        item.show=true
-      }
-    }else{
-      item.show=true
-    }
+    
     
 })
-export{axisConfig}
+export{configData}

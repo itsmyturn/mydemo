@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import Point from '../point.js'
 import {ConnectLine} from './connect_line.js'
 export class Cooling{
@@ -8,7 +8,7 @@ export class Cooling{
     this.data=[]
     this.height=500
   
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item.data
         this.height=item.height

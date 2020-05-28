@@ -1,121 +1,27 @@
-
+import bloodData from "./data/blood_pressure.json"
+import date from "./data/date.json"
+import breathData from "./data/breath.json"
+import data from "./data/normal.json"
+import painData from "./data/pain.json"
+import temperatureData from './data/temperature.json'
 export let dataSource = {
   'charType': '2',
-  'logoSrc': null,
-  'chartData': [
-    {
-      'datetime': '2020-04-21 02:00:00',
-      'yw': 37,
-      'kw': null,
-      'gw': null,
-      'sw': '',
-      'jw': '',
-      'xl': 181,
-      'ml': 80,
-      'hx': null,
-      'patientStatus': false,
-      'pacemakerStatus': true
-    },
-    {
-      'datetime': '2020-04-21 10:00:00',
-      'yw': null,
-      'kw': 40,
-      'gw': null,
-      'sw': '',
-      'jw': '',
-      'xl': null,
-      'ml': '140',
-      'hx': null,
-      'patientStatus': false,
-      'pacemakerStatus': true
-    },
-    {
-      'datetime': '2020-04-22 02:00:00',
-      'yw': 39.5,
-      'kw': null,
-      'gw': 40,
-      'sw': '',
-      'jw': '',
-      'xl': 130,
-      'ml': '181',
-      'hx': null,
-      'patientStatus': false,
-      'pacemakerStatus': true
-    },
-    {
-      'datetime': '2020-04-23 02:00:00',
-      'yw': null,
-      'kw': null,
-      'gw': 39,
-      'sw': '',
-      'jw': '',
-      'xl': 160,
-      'ml': 160,
-      'hx': null,
-      'patientStatus': false,
-      'pacemakerStatus': false
-    }
-    //  {
-    //   'datetime': '2020-04-24 02:00:00',
-    //   'yw': 38.5,
-    //   'kw': null,
-    //   'gw': null,
-    //   'sw': '',
-    //   'jw': '',
-    //   'xl': '',
-    //   'ml': 150,
-    //   'hx': 190,
-    //   'patientStatus': false,
-    //   'pacemakerStatus': false
-    // }, {
-    //   'datetime': '2020-04-25 02:00:00',
-    //   'yw': null,
-    //   'kw': 38.5,
-    //   'gw': null,
-    //   'sw': '',
-    //   'jw': '',
-    //   'xl': 120,
-    //   'ml': 150,
-    //   'hx': 190,
-    //   'patientStatus': false,
-    //   'pacemakerStatus': false
-    // }, {
-    //   'datetime': '2020-04-26 06:00:00',
-    //   'yw': null,
-    //   'kw': null,
-    //   'gw': null,
-    //   'sw': '',
-    //   'jw': '',
-    //   'xl': '182',
-    //   'ml': 140,
-    //   'hx': null,
-    //   'patientStatus': false,
-    //   'pacemakerStatus': true
-    // },
-  ],
-  'painData':  [{
-    "datetime": "2020-04-21 02:00:00",
-    "pain": 4,
-    "zt": null
-  }, {
-    "datetime": "2020-04-22 02:00:00",
-    "pain": 7,
-    "zt": 3
-  }, {
-    "datetime": "2020-04-22 06:00:00",
-    "pain": null,
-    "zt": null
-  }, {
-    "datetime": "2020-04-23 02:00:00",
-    "pain": 3,
-    "zt": 3
-  }, {
-    "datetime": "2020-04-24 02:00:00",
-    "pain": null,
-    "zt": null
+  'chartData':temperatureData,
+  painData,
+  'statusUp': [{
+    "datetime": "2020-04-20 05:01:00",
+    "value":"手术"
+  },{
+    "datetime": "2020-04-24 02:01:00",
+    "value":"分娩"
   }],
-  'statusUp': [],
-  'statusDown': null,
+  "statusDown":[{
+    "datetime": "2020-04-20 02:01:00",
+    "value":"外出"
+  },{
+    "datetime": "2020-04-24 02:01:00",
+    "value":"拒测"
+  }],
   'patientInfo': {
     'header': [{
       'nameCn': '姓名',
@@ -195,223 +101,21 @@ export let dataSource = {
       'nameEn': 'TE_SHU_ZHI_LIAO'
     }],
     'data': {
-      'date': [{
-        'datetime': '2020-04-20 00:00:00',
-        'value': '2020-04-20 00:00:00'
-      }, {
-        'datetime': '2020-04-21 00:00:00',
-        'value': '2020-04-21 00:00:00'
-      }, {
-        'datetime': '2020-04-22 00:00:00',
-        'value': '2020-04-22 00:00:00'
-      }, {
-        'datetime': '2020-04-23 00:00:00',
-        'value': '2020-04-23 00:00:00'
-      }, {
-        'datetime': '2020-04-24 00:00:00',
-        'value': '2020-04-24 00:00:00'
-      }, {
-        'datetime': '2020-04-25 00:00:00',
-        'value': '2020-04-25 00:00:00'
-      }, {
-        'datetime': '2020-04-26 00:00:00',
-        'value': '2020-04-26 00:00:00'
-      }],
-      'xueYa': [{
-        'datetime': '2020-04-20 00:00:00',
-        'value': [{
-          'datetime': '2020-04-20 02:00:00',
-          'value': {}
-        }, {
-          'datetime': '2020-04-20 06:00:00',
-          'value': {}
-        }, {
-          'datetime': '2020-04-20 10:00:00',
-          'value': {}
-        }, {
-          'datetime': '2020-04-20 14:00:00',
-          'value': {}
-        }, {
-          'datetime': '2020-04-20 18:00:00',
-          'value': {}
-        }, {
-          'datetime': '2020-04-20 22:00:00',
-          'value': {}
-        }]
-      }, {
-        'datetime': '2020-04-21 00:00:00',
-        'value': [{
-          'datetime': '2020-04-21 02:00:00',
-          'value': {}
-        }]
-      }, {
-        'datetime': '2020-04-22 00:00:00',
-        'value': [{
-          'datetime': '2020-04-22 02:00:00',
-          'value': {}
-        }]
-      }, {
-        'datetime': '2020-04-23 00:00:00',
-        'value': [{
-          'datetime': '2020-04-23 02:00:00',
-          'value': {}
-        }]
-      }, {
-        'datetime': '2020-04-24 00:00:00',
-        'value': [{
-          'datetime': '2020-04-24 02:00:00',
-          'value': {}
-        }]
-      }],
-      'DA_BIAN_CI_SHU': [{
-        'datetime': '2020-04-20 22:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 02:00:00',
-        'value': ''
-      }],
-      'PI_SHI_JIE_GUO': [{
-        'datetime': '2020-04-20 22:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 02:00:00',
-        'value': ''
-      }],
-      'zhuYuanTianshu': [{
-        'datetime': '2020-04-20 00:00:00',
-        'value': 34
-      }, {
-        'datetime': '2020-04-21 00:00:00',
-        'value': 35
-      }, {
-        'datetime': '2020-04-22 00:00:00',
-        'value': 36
-      }, {
-        'datetime': '2020-04-23 00:00:00',
-        'value': 37
-      }, {
-        'datetime': '2020-04-24 00:00:00',
-        'value': 38
-      }, {
-        'datetime': '2020-04-25 00:00:00',
-        'value': 39
-      }, {
-        'datetime': '2020-04-26 00:00:00',
-        'value': 40
-      }],
-      'XUE_TANG_JIAN_CE_ZHImmolL': [{
-        'datetime': '2020-04-20 22:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 02:00:00',
-        'value': ''
-      }],
-      'TE_SHU_ZHI_LIAO': [{
-        'datetime': '2020-04-20 22:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 02:00:00',
-        'value': ''
-      }],
-      'hx': [{
-        'datetime': '2020-04-20 18:00:00',
-        'value': 'R'
-      }, {
-        'datetime': '2020-04-20 22:00:00',
-        'value': 'R'
-      }],
-      'shouShu': [{
-        'datetime': '2020-04-20 00:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 00:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 00:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 00:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 00:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-25 00:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-26 00:00:00',
-        'value': ''
-      }],
-      'NIAO_LIANG_ml': [],
-      'TI_GE_JIAN_CHATI_ZHONG': [{
-        'datetime': '2020-04-20 22:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 02:00:00',
-        'value': ''
-      }],
-      'TI_GE_JIAN_CHASHEN_GAO': [{
-        'datetime': '2020-04-20 22:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-21 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-22 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-23 02:00:00',
-        'value': ''
-      }, {
-        'datetime': '2020-04-24 02:00:00',
-        'value': ''
-      }],
-      'YE_TI_RU_LIANG_ml': []
+      'date': date,
+      'xueYa': bloodData,
+      'DA_BIAN_CI_SHU': data,
+      'PI_SHI_JIE_GUO': data,
+      'zhuYuanTianshu': data,
+      'XUE_TANG_JIAN_CE_ZHImmolL': data,
+      'TE_SHU_ZHI_LIAO':data,
+      'hx': breathData,
+      'shouShu': data,
+      'NIAO_LIANG_ml': data,
+      'TI_GE_JIAN_CHATI_ZHONG':data,
+      'TI_GE_JIAN_CHASHEN_GAO': data,
+      'YE_TI_RU_LIANG_ml': data
     }
   }
 }
+
+

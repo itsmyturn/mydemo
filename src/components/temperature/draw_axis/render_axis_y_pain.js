@@ -1,10 +1,10 @@
 import * as d3 from 'd3'
 import {Axis} from './axis.js'
-import {axisConfig} from './axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 export class PainAxisY{
   constructor(){
     this.height=100
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='pain'){
         this.height=item.height
       }

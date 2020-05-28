@@ -1,13 +1,13 @@
 import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import Point from '../point.js'
 import {toFixed} from '../util.js'
 export class Temperature{
   constructor(){
     this.data=[]
     this.height=500
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.height=item.height
         this.data=item.data.filter(item=>{

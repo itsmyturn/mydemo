@@ -1,10 +1,10 @@
 import * as d3 from 'd3'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import {Axis} from '../draw_axis/axis.js'
 import {modHour,formatTime} from '../util.js'
 export class Normal7{
   constructor(){
-    this.data=axisConfig.filter(item=>{
+    this.data=new DataSourceSingle().filter(item=>{
       return item.show
     })
   }

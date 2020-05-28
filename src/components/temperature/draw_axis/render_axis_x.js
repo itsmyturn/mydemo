@@ -1,12 +1,12 @@
 import * as d3 from 'd3'
-import {AxisTickStyle} from './axis_tick_style.js'//坐标轴tick样式接口
-import {axisConfig} from './axisconfig.js'
+import {AxisTickStyle} from './axis_tick_style.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import {Axis} from './axis.js'
 
 
 export class AxisX{
   constructor(){
-      this.data=axisConfig.filter(item=>{
+      this.data=new DataSourceSingle().filter(item=>{
         return item.show
       })
   }

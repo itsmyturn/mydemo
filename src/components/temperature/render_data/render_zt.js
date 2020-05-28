@@ -1,13 +1,13 @@
 import * as d3 from 'd3'
 import {Axis} from '../draw_axis/axis.js'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 import Point from '../point.js'
 import {ConnectLine} from './connect_line.js'
 export class Zt{
   constructor(){
     this.data=[]
     this.painLine=null
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='pain'){
         this.data=item.data
       }

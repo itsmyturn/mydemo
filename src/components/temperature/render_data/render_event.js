@@ -1,13 +1,13 @@
 import * as d3 from 'd3'
 import {modHour} from '../util.js'
 import {Axis} from '../draw_axis/axis.js'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 export class Event{
   constructor(command){
     this.data=[]
     this.command=command
     this.showPain=false
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item[this.command]  
       }

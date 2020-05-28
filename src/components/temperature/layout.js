@@ -1,20 +1,15 @@
 import * as d3 from 'd3'
-import {dataSource} from './datasource2.js'
-import {AdaptData} from './adaptData.js'
-import {axisConfig} from './draw_axis/axisconfig.js'
-//插入数据结构
-//适配体温单需要的数据
-
-let adaptData=new AdaptData(dataSource)
+import {DataSourceSingle} from './datasource_adapter.js'
 export  class Layout{
   constructor(){
-    this.titleData=adaptData.getDynamicHeader()
     this.wrap=null
     this.titleWrap=null
     this.row=null
     this.colums=null
+    this.data=new DataSourceSingle()
     this.createWrap()
     this.createRowDiv()
+    
   }
   createWrap(){
     this.titleWrapDiv=d3
@@ -24,7 +19,7 @@ export  class Layout{
     this.row=this.titleWrapDiv
       .selectAll('div')
       .data(()=>{
-        return axisConfig.filter(item=>item.show)
+        return this.data.filter(item=>item.show)
       })
       .enter()
       .append('div')

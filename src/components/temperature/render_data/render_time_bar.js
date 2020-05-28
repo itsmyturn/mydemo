@@ -1,10 +1,10 @@
 import * as d3 from 'd3'
-import {axisConfig} from '../draw_axis/axisconfig.js'
+import {DataSourceSingle} from '../datasource_adapter.js'
 export class TimeBar{
   constructor(){
     this.timeAxisData = []
     this.data=[]
-    axisConfig.forEach(item=>{
+    new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='time'){
         this.createTime(item.timeBarType ||'start2of24')
       }
