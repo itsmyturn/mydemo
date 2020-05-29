@@ -27,5 +27,5 @@ export function axisTest(){
   new RenderAxis().render()//坐标轴
   new RenderData().renderData() //数据
   renderpain()
-  new DrawIconTest()
+  // new DrawIconTest()
 }

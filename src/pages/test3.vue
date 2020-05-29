@@ -1,21 +1,26 @@
 <template>
     <div >
         <div class="print"><button @click="print">打印</button></div>
-        
-        <div id="printContent" class="test3">
-            <div class="temperature_wrap" >
-                <div class="left_title_div"></div>
-                <div class="right_content">
-                    <div class="content_auto">
-                        
+        <div class="test3">
+            <el-scrollbar 
+                ref="myScrollbar"
+            >
+                <div class="scroll" style="padding-right:15px;" id="printContent" >
+                    <div class="temperature_wrap" >
+                        <div class="left_title_div"></div>
+                        <div class="right_content">
+                            <div class="content_auto">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="legend">
+             </el-scrollbar>
+            <!-- <div class="legend">
                 <div class="icon" v-for="item in icons" :key="item">
                     <p>{{item}}</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -34,8 +39,26 @@ export default {
         this.$nextTick(()=>{
             axisTest()
         })
+        this.handlerScroll()
     },
     methods:{
+        handlerScroll(){
+            let scrollbarEl = this.$refs.myScrollbar.wrap
+            let clientHeight=window.innerHeight|| document.documentElement.clientHeightundingClientRect().top
+            let height=scrollbarEl.offsetHeight
+            let top=scrollbarEl.getBoundingClientRect().top+window.scrollY
+            console.log(top,height,clientHeight)
+            if((top+height)<clientHeight)return false
+            scrollbarEl.onscroll = function() {
+                let inScrollTop=scrollbarEl.scrollTop
+                let inScrollHeight=scrollbarEl.scrollHeight
+                let ratio=inScrollTop/inScrollHeight
+                let bodyScrollHeight=window.document.body.scrollHeight
+                let top=bodyScrollHeight*ratio
+                scrollTo(0,top)
+                scrollTo(0,top)
+            }
+        },
         print(){
             var oldhtml = document.body.innerHTML
             document.body.innerHTML = document.getElementById('printContent').innerHTML
@@ -49,24 +72,26 @@ export default {
 }
 </script>
 <style scoped>
+/deep/.el-scrollbar__wrap{
+    overflow-x:auto;
+}
 .print{
     height: 30px;
     line-height: 30px;
 }
 .test3{/*需要考虑a4纸的大小*/
-    width: 1000px;
+    /* width: 1000px; */
     margin:0 auto;
     display:flex;
     flex-direction: row;
     text-align: left;
-    /* height:900px; */
-    overflow: auto;
+    height:800px;
+    overflow: hidden;
 }
 .temperature_wrap{
     display:flex;
     flex-direction: row;
     width: 700px;
-    /* height:900px; */
     /* width:750px;
     height:900px; */
     /* width: 210mm;
