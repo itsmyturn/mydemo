@@ -10,12 +10,18 @@ export class Heart{
     new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
         this.height=item.height
+        this.pulseRange=item.pulseRange       
+        this.temperatureRange=item.temperatureRange
         this.data=item.data.filter(item=>{
           return item.xl|| item.patientStatus
         })
       }
     })
     this.parent=d3.select('.axis_layout_temperatureAndPulse')
+    let pulseMin=this.pulseRange.min
+    let pulseMax=this.pulseRange.max
+    let temperatureMin=this.temperatureRange.min
+    let temperatureMax=this.temperatureRange.max
     this.axis=new Axis()
     this.axis.setAxisConfig({
       tickSizeY:0,
@@ -24,8 +30,8 @@ export class Heart{
           return d
         }
       },
-      tickValueRange:[12,180,4],
-      domainRange:[12, 180],
+      tickValueRange:[pulseMin,pulseMax,4],
+      domainRange:[pulseMin, pulseMax],
       valueRange:[this.height, 0]
     })
     this.temperatureAxis=new Axis()
@@ -35,8 +41,8 @@ export class Heart{
             return d
         }
       },
-      tickValueRange:[33.6,42,0.2],
-      domainRange:[33.6, 42],
+      tickValueRange:[temperatureMin,temperatureMax,0.2],
+      domainRange:[temperatureMin, temperatureMax],
       valueRange:[this.height, 0]
     })
 

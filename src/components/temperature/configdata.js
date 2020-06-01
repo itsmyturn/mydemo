@@ -35,6 +35,8 @@ const configData=[{
   "nameEn": "temperatureAndPulse",
   "top":rowHeight,
   "stepX":4,
+  "pulseRange":{"min":12,"max":180},
+  "temperatureRange":{"min":33.6,"max":42},
   // "data":temperatureData,
   "statusUp":[{
     "datetime": "2020-04-20 05:01:00",

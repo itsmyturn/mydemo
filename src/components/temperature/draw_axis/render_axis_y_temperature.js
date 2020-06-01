@@ -13,16 +13,19 @@ export class TemperatureAxisY{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item.data
         this.height=item.height
+        this.temperatureRange=item.temperatureRange
       }
     })
+    let min=this.temperatureRange.min
+    let max=this.temperatureRange.max
     axis.setAxisConfig({
       tickFormatCallback:function (d){
         if (Math.floor(d) === d) {
             return d
         }
       },
-      tickValueRange:[33.6,42,0.2],
-      domainRange:[33.6, 42],
+      tickValueRange:[min,max,0.2],
+      domainRange:[min, max],
       valueRange:[this.height, 0]
     })
     parent

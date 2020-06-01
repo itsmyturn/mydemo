@@ -12,17 +12,20 @@ export class Cooling{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item.data
         this.height=item.height
+        this.temperatureRange=item.temperatureRange
       }
     })
     this.axis=new Axis()
+    let temperatureMin=this.temperatureRange.min
+    let temperatureMax=this.temperatureRange.max
     this.axis.setAxisConfig({
       tickFormatCallback:function (d){
         if (Math.floor(d) === d) {
             return d
         }
       },
-      tickValueRange:[33.6,42,0.2],
-      domainRange:[33.6, 42],
+      tickValueRange:[temperatureMin,temperatureMax,0.2],
+      domainRange:[temperatureMin,temperatureMax, 42],
       valueRange:[this.height, 0]
     })
   }

@@ -9,6 +9,7 @@ export class PulseAxisY{
       if(item.nameEn==='temperatureAndPulse'){
         this.data=item.data
         this.height=item.height
+        this.pulseRange=item.pulseRange
       }
     })
   }
@@ -21,8 +22,8 @@ export class PulseAxisY{
           return d
         }
       },
-      tickValueRange:[12,180,4],
-      domainRange:[12, 180],
+      tickValueRange:[this.pulseRange.min,this.pulseRange.max,4],
+      domainRange:[this.pulseRange.min, this.pulseRange.max],
       valueRange:[this.height, 0]
 
     })
