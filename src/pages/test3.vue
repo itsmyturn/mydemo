@@ -69,7 +69,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 /deep/.el-scrollbar__wrap{
     overflow-x:auto;
 }

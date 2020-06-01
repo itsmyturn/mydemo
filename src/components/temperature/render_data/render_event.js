@@ -6,17 +6,22 @@ export class Event{
   constructor(command){
     this.data=[]
     this.command=command
-    this.showPain=false
     new DataSourceSingle().forEach(item=>{
       if(item.nameEn==='temperatureAndPulse'){
-        this.data=item[this.command]  
-      }
-      if(item.nameEn==='pain'){
-        this.showPain=item.show
+        this.data=item[this.command]
+        this.temperatureRange=item.temperatureRange
+        this.height=item.height
       }
     })
     this.parent=d3.select('.axis_layout_temperatureAndPulse')
     this.axis=new Axis()
+    let temperatureMin=this.temperatureRange.min
+    let temperatureMax=this.temperatureRange.max
+    this.axis.setAxisConfig({
+      tickValueRange:[temperatureMin,temperatureMax,0.2],
+      domainRange:[temperatureMin, temperatureMax],
+      valueRange:[this.height, 0]
+    })
   }
   renderData(){
     if (!this.data.length) return false
@@ -32,15 +37,11 @@ export class Event{
       .attr('class', 'textItem')
       .attr('transform', (d) =>{
         let  x = this.axis.getScaleX()(modHour(d))-5
+        let y=this.axis.getScaleY()(35)+10
         if (this.command === 'statusUp') {
           return 'translate(' + x + ',10)'
         } else if (this.command === 'statusDown') {
-          if(this.showPain){
-            return 'translate(' + x + ',430)'
-          }else{
-            return 'translate(' + x + ',512)'
-          }
-          
+          return 'translate(' + x + ','+y+')'
         }
       })
       .selectAll('text')
