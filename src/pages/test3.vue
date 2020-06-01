@@ -47,15 +47,13 @@ export default {
             let clientHeight=window.innerHeight|| document.documentElement.clientHeightundingClientRect().top
             let height=scrollbarEl.offsetHeight
             let top=scrollbarEl.getBoundingClientRect().top+window.scrollY
-            console.log(top,height,clientHeight)
             if((top+height)<clientHeight)return false
             scrollbarEl.onscroll = function() {
                 let inScrollTop=scrollbarEl.scrollTop
-                let inScrollHeight=scrollbarEl.scrollHeight
+                let inScrollHeight=scrollbarEl.scrollHeight-height
                 let ratio=inScrollTop/inScrollHeight
                 let bodyScrollHeight=window.document.body.scrollHeight
                 let top=bodyScrollHeight*ratio
-                scrollTo(0,top)
                 scrollTo(0,top)
             }
         },

@@ -28,15 +28,15 @@ const configData=[{
   "top":rowHeight,
   "height":rowHeight,
   "stepX":4,
-  "timeBarType":"start2of24"
+  "timeBarType":"start3of24"
 },
 {
   "nameCn": "体温脉搏",
   "nameEn": "temperatureAndPulse",
   "top":rowHeight,
   "stepX":4,
-  "pulseRange":{"min":12,"max":180},
-  "temperatureRange":{"min":33.6,"max":42},
+  "pulseRange":{"min":16,"max":180},
+  "temperatureRange":{"min":33.8,"max":42},
   // "data":temperatureData,
   "statusUp":[{
     "datetime": "2020-04-20 05:01:00",
